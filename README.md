@@ -1,3 +1,4 @@
-# Learning-Note
+# Learning-Notes
+===
 
 *Maching Learning
