@@ -1,5 +1,12 @@
 # Learning-Note
 Learning Note
 =============
-deep learning
+  Machine learning
+------
+  Deep Learning
 -------------
+  Algorithms
+----
+  Operating System
+---
+
