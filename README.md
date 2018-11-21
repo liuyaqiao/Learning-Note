@@ -1,11 +1,5 @@
-># Learning-Note
+# Learning-Note
 =========
->>Machine learning
+##Machine learning
 ------
->>Deep Learning
--------------
->>Algorithms
-----
->>Operating System
----
 
