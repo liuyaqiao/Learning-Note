@@ -6,7 +6,7 @@
 	* LR
 	* SVM
 	* Decision Tree
-
+	- Ensemble
   
 ## Algorithms
 1. [leetcode](https://github.com/liuyaqiao/Algorithms/tree/master/src)  
