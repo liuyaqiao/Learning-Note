@@ -2,10 +2,10 @@
 # Content
 ## Machine Learning
 1. basic rules
-2. [tradition algorithms](https://github.com/liuyaqiao/Learning-Note/tree/master/Machine%20Learning/Algorithms) 
-	1. LR
-	2. SVM
-	3. Decision Tree
+2. [tradition algorithms](https://github.com/liuyaqiao/Learning-Note/tree/master/Machine%20Learning/Algorithms)
+	* LR
+	* SVM
+	* Decision Tree
 
   
 ## Algorithms
