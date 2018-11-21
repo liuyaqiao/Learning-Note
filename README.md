@@ -1,5 +1,3 @@
 # Learning-Note
-=========  
-Machine learning
-------
 
+*Maching Learning
