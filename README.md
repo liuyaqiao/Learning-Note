@@ -1,8 +1,8 @@
 
 # Content
 ## Machine Learning
-1. basic rules  
-2. tradition algorithms
+1. [basic rules] 
+2. [tradition algorithms](https://github.com/liuyaqiao/Learning-Note/tree/master/Machine%20Learning/Algorithms) 
   
 ## Algorithms
 1. [leetcode](https://github.com/liuyaqiao/Algorithms/tree/master/src)  
