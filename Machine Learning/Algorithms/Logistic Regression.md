@@ -39,7 +39,7 @@ LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分
 <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\cdot&space;\frac{\delta&space;}{\delta&space;_{\theta_{j}}}J(\theta&space;)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\cdot&space;\frac{\delta&space;}{\delta&space;_{\theta_{j}}}J(\theta&space;)" title="\theta_{j} = \theta_{j} - \alpha \cdot \frac{\delta }{\delta _{\theta_{j}}}J(\theta )" /></a>  
 经过数学运算可以得到：  
 <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\frac{1}{m}&space;\sum_{i&space;=&space;1}^{m}(\pi(x_{i})&space;-&space;y_{i}))x_{j}^{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\frac{1}{m}&space;\sum_{i&space;=&space;1}^{m}(\pi(x_{i})&space;-&space;y_{i}))x_{j}^{i}" title="\theta_{j} = \theta_{j} - \alpha \frac{1}{m} \sum_{i = 1}^{m}(\pi(x_{i}) - y_{i}))x_{j}^{i}" /></a>  
-末尾的x表示第i个pai(x)的值对第j个参数theta的导数。[此处难以理解，后续将以代码展示]  
+末尾的x表示第i个pai(x)的值对第j个参数theta的导数，它就是对应位置某一个的x。[此处难以理解，后续将以代码展示]  
 
 ```
 def gradAscent(dataMatIn, classLabels):
@@ -62,12 +62,7 @@ def gradAscent(dataMatIn, classLabels):
         weights = weights + alpha * dataMatrix.transpose() * error
     return array(weights)
 ```
-这个最后一行即为数学表达式的代码形式，dataMatrix.transpose()ji即为Xij。
-
-
-
-
-
+这里可以将x看成一个矩阵，而参数是列向量，所内积的结果也是一个列向量。对相关参数求偏导的结果就是对应的xij元素。求和符号将所有的x合成了一个矩阵，所以写出了如上的代码。
 
 ## 正则化
 
