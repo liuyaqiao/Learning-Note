@@ -86,7 +86,7 @@ LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分
     <a href="https://www.codecogs.com/eqnedit.php?latex=logPr(Y_{i}&space;=&space;K)&space;=&space;w_{K}&space;\cdot&space;X_{i}&space;-&space;logZ" target="_blank"><img src="https://latex.codecogs.com/gif.latex?logPr(Y_{i}&space;=&space;K)&space;=&space;w_{K}&space;\cdot&space;X_{i}&space;-&space;logZ" title="logPr(Y_{i} = K) = w_{K} \cdot X_{i} - logZ" /></a>  
     这里使用了一个额外的归一化项来使得概率可以形成一个概率分布，从而使这些概率和为1.  
     <a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" title="\sum_{k = 1}^{K}Pr(Y_{i} = k) = 1" /></a>  
-    带入上面的求和公式，可以得到：
+    带入上面的求和公式，可以得到：  
     <a href="https://www.codecogs.com/eqnedit.php?latex=Z&space;=&space;\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Z&space;=&space;\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}" title="Z = \sum_{k = 1}^{K}e^{w_{k}\cdot x_{i}}" /></a>  
     根据概率公式可以得到所有的概率都可以写为：  
     <a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" title="\sum_{k = 1}^{K}Pr(Y_{i} = k) = 1" /></a>  
