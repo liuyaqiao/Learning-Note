@@ -33,7 +33,11 @@ LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分
 <a href="https://www.codecogs.com/eqnedit.php?latex=Pr(Y&space;=&space;1|x)&space;=&space;\frac{e^{wx}}{e^{wx}&space;&plus;&space;1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr(Y&space;=&space;1|x)&space;=&space;\frac{e^{wx}}{e^{wx}&space;&plus;&space;1}" title="Pr(Y = 1|x) = \frac{e^{wx}}{e^{wx} + 1}" /></a>  
 <a href="https://www.codecogs.com/eqnedit.php?latex=Pr(Y&space;=&space;0|x)&space;=&space;\frac{1}{e^{wx}&space;&plus;&space;1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr(Y&space;=&space;0|x)&space;=&space;\frac{1}{e^{wx}&space;&plus;&space;1}" title="Pr(Y = 0|x) = \frac{1}{e^{wx} + 1}" /></a>    
 
-## 代价函数
+## 代价函数  
+<a href="https://www.codecogs.com/eqnedit.php?latex=J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" title="J(\theta ) = -\frac{l(\theta )}{m}" /></a>  
+
+
+
 
 ## 正则化
 
@@ -108,5 +112,6 @@ MvM是每次将若干个类作为正类，若干个类作为负类。但是类�
     
 注：  
     当类别标签是互斥的时候，适合用softmax回归。当类别标签不是互斥的时候，则可以使用其他的处理方式。  
+
     
     
