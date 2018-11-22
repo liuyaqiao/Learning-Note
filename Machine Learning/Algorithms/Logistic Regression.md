@@ -65,7 +65,9 @@ def gradAscent(dataMatIn, classLabels):
 这里可以将x看成一个矩阵，而参数是列向量，所内积的结果也是一个列向量。对相关参数求偏导的结果就是对应的xij元素。求和符号将所有的x合成了一个矩阵，所以写出了如上的代码。
 
 ## 正则化
-
+如果变量（特征）过多的时候，会出现过拟合的情况。这种情况下训练出的方程总是能很好的拟合训练数据，也就是说，我们的代价函数可能非常接近于 0 或者就为 0。但是，这样做出的模型往往不够泛化，不能适用于大多数情况。为了防止这样的情况出现，我们会在目标函数中加入正则项，目的是使参数空间受到一定的限制。  
+L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩罚』是指对损失函数中的某些参数做一些限制。对于线性回归模型，使用L1正则化的模型建叫做Lasso回归，使用L2正则化的模型叫做Ridge回归（岭回归）。  
+<a href="https://www.codecogs.com/eqnedit.php?latex=J(w)&space;=&space;J(w)&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|_{p}\left\{\begin{matrix}&space;L_{1}\rightarrow&space;\left&space;\|&space;w&space;\right&space;\|_{1}\\L2\rightarrow&space;\frac{1}{2}\left&space;\|&space;w&space;\right&space;\|_{2}&space;^{2}&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?J(w)&space;=&space;J(w)&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|_{p}\left\{\begin{matrix}&space;L_{1}\rightarrow&space;\left&space;\|&space;w&space;\right&space;\|_{1}\\L2\rightarrow&space;\frac{1}{2}\left&space;\|&space;w&space;\right&space;\|_{2}&space;^{2}&space;\end{matrix}\right." title="J(w) = J(w) + \lambda \left \| w \right \|_{p}\left\{\begin{matrix} L_{1}\rightarrow \left \| w \right \|_{1}\\L2\rightarrow \frac{1}{2}\left \| w \right \|_{2} ^{2} \end{matrix}\right." /></a>
 ## 优化方法
 
 ## 优缺点分析
