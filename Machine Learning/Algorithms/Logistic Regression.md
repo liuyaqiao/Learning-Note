@@ -72,7 +72,20 @@ LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分
     <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y&space;=&space;k&space;|&space;x)&space;=&space;\frac{exp(w_{k}\cdot&space;x)}{1&space;&plus;&space;\sum_{k&space;=&space;1}^{K&space;-&space;1}exp(w_{k}&space;\cdot&space;x)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y&space;=&space;k&space;|&space;x)&space;=&space;\frac{exp(w_{k}\cdot&space;x)}{1&space;&plus;&space;\sum_{k&space;=&space;1}^{K&space;-&space;1}exp(w_{k}&space;\cdot&space;x)}" title="P(Y = k | x) = \frac{exp(w_{k}\cdot x)}{1 + \sum_{k = 1}^{K - 1}exp(w_{k} \cdot x)}" /></a >            
     
     <a href="https://www.codecogs.com/eqnedit.php?latex=k&space;=&space;1,2,...,K&space;-&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k&space;=&space;1,2,...,K&space;-&space;1" title="k = 1,2,...,K - 1" /></a>
-    
+
+    通过这种方式，就可以扩展到多个类别的分类问题。
     
 3. 回归系数分析
 4. 看成是一个对数线性模型
+
+    我们可以直接将其扩展成多类别回归模型。具体来说，就是使用线性预测器和额外的归一化因子（一个配分函数的对数形式）来对某个结果的概率的对数进行建模。形式如下：
+
+    <a href="https://www.codecogs.com/eqnedit.php?latex=logPr(Y_{i}&space;=&space;1)&space;=&space;w_{1}&space;\cdot&space;X_{i}&space;-&space;logZ" target="_blank"><img src="https://latex.codecogs.com/gif.latex?logPr(Y_{i}&space;=&space;1)&space;=&space;w_{1}&space;\cdot&space;X_{i}&space;-&space;logZ" title="logPr(Y_{i} = 1) = w_{1} \cdot X_{i} - logZ" /></a>  
+    <a href="https://www.codecogs.com/eqnedit.php?latex=logPr(Y_{i}&space;=&space;2)&space;=&space;w_{2}&space;\cdot&space;X_{i}&space;-&space;logZ" target="_blank"><img src="https://latex.codecogs.com/gif.latex?logPr(Y_{i}&space;=&space;2)&space;=&space;w_{2}&space;\cdot&space;X_{i}&space;-&space;logZ" title="logPr(Y_{i} = 2) = w_{2} \cdot X_{i} - logZ" /></a>  
+    ......  
+    <a href="https://www.codecogs.com/eqnedit.php?latex=logPr(Y_{i}&space;=&space;K)&space;=&space;w_{K}&space;\cdot&space;X_{i}&space;-&space;logZ" target="_blank"><img src="https://latex.codecogs.com/gif.latex?logPr(Y_{i}&space;=&space;K)&space;=&space;w_{K}&space;\cdot&space;X_{i}&space;-&space;logZ" title="logPr(Y_{i} = K) = w_{K} \cdot X_{i} - logZ" /></a>  
+    这里使用了一个额外的归一化项来使得概率可以形成一个概率分布，从而使这些概率和为1.  
+    <a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" title="\sum_{k = 1}^{K}Pr(Y_{i} = k) = 1" /></a>
+    带入上面的求和公式，可以得到：
+        
+
