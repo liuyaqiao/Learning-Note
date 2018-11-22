@@ -34,7 +34,37 @@ LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分
 <a href="https://www.codecogs.com/eqnedit.php?latex=Pr(Y&space;=&space;0|x)&space;=&space;\frac{1}{e^{wx}&space;&plus;&space;1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr(Y&space;=&space;0|x)&space;=&space;\frac{1}{e^{wx}&space;&plus;&space;1}" title="Pr(Y = 0|x) = \frac{1}{e^{wx} + 1}" /></a>    
 
 ## 代价函数  
-<a href="https://www.codecogs.com/eqnedit.php?latex=J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" title="J(\theta ) = -\frac{l(\theta )}{m}" /></a>  
+<a href="https://www.codecogs.com/eqnedit.php?latex=J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" title="J(\theta ) = -\frac{l(\theta )}{m}" /></a>  是似然函数对样本数商值得相反数  
+我们为了得到最优得参数，需要最优化上述得代价函数。（这里以随机梯度下降法为例）  
+<a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\cdot&space;\frac{\delta&space;}{\delta&space;_{\theta_{j}}}J(\theta&space;)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\cdot&space;\frac{\delta&space;}{\delta&space;_{\theta_{j}}}J(\theta&space;)" title="\theta_{j} = \theta_{j} - \alpha \cdot \frac{\delta }{\delta _{\theta_{j}}}J(\theta )" /></a>  
+经过数学运算可以得到：  
+<a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\frac{1}{m}&space;\sum_{i&space;=&space;1}^{m}(\pi(x_{i})&space;-&space;y_{i}))x_{j}^{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\frac{1}{m}&space;\sum_{i&space;=&space;1}^{m}(\pi(x_{i})&space;-&space;y_{i}))x_{j}^{i}" title="\theta_{j} = \theta_{j} - \alpha \frac{1}{m} \sum_{i = 1}^{m}(\pi(x_{i}) - y_{i}))x_{j}^{i}" /></a>  
+末尾的x表示第i个pai(x)的值对第j个参数theta的导数。[此处难以理解，后续将以代码展示]  
+
+```
+def gradAscent(dataMatIn, classLabels):
+    #转换为numpy型
+    dataMatrix = mat(dataMatIn) 
+    # 转化为矩阵[[0,1,0,1,0,1.....]]，并转制[[0],[1],[0].....] 
+    # transpose() 行列转置函数
+    # 将行向量转化为列向量   =>  矩阵的转置
+    labelMat = mat(classLabels).transpose()
+    # m->数据量，样本数 n->特征数
+    m,n = shape(dataMatrix)
+    alpha = 0.001 #步长
+    maxCycles = 500 #迭代次数
+    #初始化权值向量，每个维度均为1.0
+    weights = ones((n,1))
+    for k in range(maxCycles):
+        #求当前sigmoid函数的值
+        h = sigmoid(dataMatrix * weights)
+        error = (labelMat - h)
+        weights = weights + alpha * dataMatrix.transpose() * error
+    return array(weights)
+```
+这个最后一行即为数学表达式的代码形式，dataMatrix.transpose()ji即为Xij。
+
+
 
 
 
