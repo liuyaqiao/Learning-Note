@@ -98,7 +98,8 @@ MvM是每次将若干个类作为正类，若干个类作为负类。但是类�
     <a href="https://www.codecogs.com/eqnedit.php?latex=Pr(Y_{i}&space;=&space;c)&space;=&space;\frac{e^{w_{c}\cdot&space;x_{i}}}{\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr(Y_{i}&space;=&space;c)&space;=&space;\frac{e^{w_{c}\cdot&space;x_{i}}}{\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}}" title="Pr(Y_{i} = c) = \frac{e^{w_{c}\cdot x_{i}}}{\sum_{k = 1}^{K}e^{w_{k}\cdot x_{i}}}" /></a>  
     这就是`softmax函数`的格式：  
     <a href="https://www.codecogs.com/eqnedit.php?latex=softmax(k,x_{1},x_{2},...,x_{n})&space;=&space;\frac{e^{x_{k}}}{\sum_{i&space;=&space;1}^{n}e^{x_{i}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?softmax(k,x_{1},x_{2},...,x_{n})&space;=&space;\frac{e^{x_{k}}}{\sum_{i&space;=&space;1}^{n}e^{x_{i}}}" title="softmax(k,x_{1},x_{2},...,x_{n}) = \frac{e^{x_{k}}}{\sum_{i = 1}^{n}e^{x_{i}}}" /></a>  
-    这个函数能够将各个自变量之间的差别放大，通过softmax函数的形式可以构造出一个像是平滑函数一样的加权平均函数。  
+    这个函数能够将各个自变量之间的差别放大，通过softmax函数的形式可以构造出一个像是平滑函数一样的加权平均函数。 
+    
 注：  
     当类别标签是互斥的时候，适合用softmax回归。当类别标签不是互斥的时候，则可以使用其他的处理方式。  
     
