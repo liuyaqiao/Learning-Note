@@ -89,6 +89,8 @@ LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分
     带入上面的求和公式，可以得到：  
     <a href="https://www.codecogs.com/eqnedit.php?latex=Z&space;=&space;\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Z&space;=&space;\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}" title="Z = \sum_{k = 1}^{K}e^{w_{k}\cdot x_{i}}" /></a>  
     根据概率公式可以得到所有的概率都可以写为：  
-    <a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{k&space;=&space;1}^{K}Pr(Y_{i}&space;=&space;k)&space;=&space;1" title="\sum_{k = 1}^{K}Pr(Y_{i} = k) = 1" /></a>  
-
+    <a href="https://www.codecogs.com/eqnedit.php?latex=Pr(Y_{i}&space;=&space;c)&space;=&space;\frac{e^{w_{c}\cdot&space;x_{i}}}{\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr(Y_{i}&space;=&space;c)&space;=&space;\frac{e^{w_{c}\cdot&space;x_{i}}}{\sum_{k&space;=&space;1}^{K}e^{w_{k}\cdot&space;x_{i}}}" title="Pr(Y_{i} = c) = \frac{e^{w_{c}\cdot x_{i}}}{\sum_{k = 1}^{K}e^{w_{k}\cdot x_{i}}}" /></a>  
+    这就是`softmax函数`的格式：  
+    <a href="https://www.codecogs.com/eqnedit.php?latex=softmax(k,x_{1},x_{2},...,x_{n})&space;=&space;\frac{e^{x_{k}}}{\sum_{i&space;=&space;1}^{n}e^{x_{i}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?softmax(k,x_{1},x_{2},...,x_{n})&space;=&space;\frac{e^{x_{k}}}{\sum_{i&space;=&space;1}^{n}e^{x_{i}}}" title="softmax(k,x_{1},x_{2},...,x_{n}) = \frac{e^{x_{k}}}{\sum_{i = 1}^{n}e^{x_{i}}}" /></a>  
+    这个函数能够将各个自变量之间的差别放大，通过softmax函数的形式可以构造出一个像是平滑函数一样的加权平均函数。
     
