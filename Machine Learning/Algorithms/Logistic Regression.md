@@ -80,13 +80,23 @@ L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩�
 1.图形角度  
 从上图中可以看到，L1的的两条线大部分会在矩形角的位置相交。这个位置会有w的分量为0。试想，在高维w分量的时候，就会出现多个w分量为0的情况。从而导致稀疏矩阵的出现。而L2正则化就没有这样的性质，所以不会有太多的稀疏性出现。  
 2.先验角度      
-我们再来从先验概率的角度分析，L1 Regularization 是认为数据服从拉普拉斯分布，L2 Regularization
-则认为数据服从高斯分布。其公式为:  
+正则化等价于对模型参数引入了先验分布，L1 Regularization 是认为模型参数服从拉普拉斯分布，L2 Regularization
+则认为模型参数服从高斯分布。其公式为:  
 <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" title="f(x) = \frac{1}{\sigma \sqrt{2\pi }}e^{-\frac{(x - \mu )^{2}}{2\sigma^{2}}}" /></a>  
 我们通过去对数似然函数的方法，可以分离出一个平方项。这就是L2的来源。而针对L1的数据，他们遵循拉普拉斯分布。
 <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" title="f(x) = \frac{1}{2\lambda }e^{-\frac{\left | x - \mu \right |}{\lambda }}" /></a>  
 ![Laplace](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/laplace.jpg)  
-拉普拉斯分布所得到的对数似然函数的附加项是线性，也就是L1的形式。
+拉普拉斯分布所得到的对数似然函数的附加项是线性，也就是L1的形式。  
+
+>`注:` `数学推导`
+    规则化 = 加入先验信息是从贝叶斯的角度来看的，如果我们考虑一个线性模型，其模型公式为：    
+    <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\sum&space;(x_{i}\theta_{i})&space;&plus;&space;\epsilon&space;=X\theta^{T}&space;&plus;&space;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\sum&space;(x_{i}\theta_{i})&space;&plus;&space;\epsilon&space;=X\theta^{T}&space;&plus;&space;\epsilon" title="f(x) = \sum (x_{i}\theta_{i}) + \epsilon =X\theta^{T} + \epsilon" /></a>  
+    其中e是白噪声，用来模拟数据集中的观测值Y和真实值之间的误差。它符合正态分布，所以数据的正态分布变成了如下格式：  
+    <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y_{i}|X_{i},&space;\theta)&space;=&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y_{i}|X_{i},&space;\theta)&space;=&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" title="P(Y_{i}|X_{i}, \theta) = \frac{1}{\epsilon \sqrt{2\pi }}exp(-\frac{\left \| f(X_{i}) - Y_{i} \right \|^{2}}{2\delta ^{2}})" /></a>  
+    所以，整体预测正确的概率是：  
+    <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X,&space;\theta)&space;=\prod&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X,&space;\theta)&space;=\prod&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" title="P(Y|X, \theta) =\prod \frac{1}{\epsilon \sqrt{2\pi }}exp(-\frac{\left \| f(X_{i}) - Y_{i} \right \|^{2}}{2\delta ^{2}})" /></a>  
+    根据极大似然估计，我们最后能够尽可能多地预测正确数据，所以我们要找到可以是似然函数（对数似然函数）最大的theta值。  
+    
 ## 优化方法
 
 ## 优缺点分析
