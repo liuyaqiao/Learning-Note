@@ -82,32 +82,28 @@ L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩�
 从上图中可以看到，L1的的两条线大部分会在矩形角的位置相交。这个位置会有w的分量为0。试想，在高维w分量的时候，就会出现多个w分量为0的情况。从而导致稀疏矩阵的出现。而L2正则化就没有这样的性质，所以不会有太多的稀疏性出现。  
 2.先验角度      
 正则化等价于对模型参数引入了先验分布，L1 Regularization 是认为模型参数服从拉普拉斯分布，L2 Regularization
-则认为模型参数服从高斯分布。其公式为:  
+则认为模型参数服从高斯分布（这里为了方便，使用线性回归的误差函数来说明）。其公式为:  
 <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" title="f(x) = \frac{1}{\sigma \sqrt{2\pi }}e^{-\frac{(x - \mu )^{2}}{2\sigma^{2}}}" /></a>  
 我们通过去对数似然函数的方法，可以分离出一个平方项。这就是L2的来源。而针对L1的数据，他们遵循拉普拉斯分布。
 <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" title="f(x) = \frac{1}{2\lambda }e^{-\frac{\left | x - \mu \right |}{\lambda }}" /></a>  
 ![Laplace](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/laplace.jpg)  
 拉普拉斯分布所得到的对数似然函数的附加项是线性，也就是L1的形式。  
 
->`注:` `数学推导`
-    规则化 = 加入先验信息是从贝叶斯的角度来看的，如果我们考虑一个线性模型，其模型公式为：    
-    <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\sum&space;(x_{i}\theta_{i})&space;&plus;&space;\epsilon&space;=X\theta^{T}&space;&plus;&space;\epsilon" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\sum&space;(x_{i}\theta_{i})&space;&plus;&space;\epsilon&space;=X\theta^{T}&space;&plus;&space;\epsilon" title="f(x) = \sum (x_{i}\theta_{i}) + \epsilon =X\theta^{T} + \epsilon" /></a>  
-    其中e是白噪声，用来模拟数据集中的观测值Y和真实值之间的误差。它符合正态分布，所以数据的正态分布变成了如下格式：  
-    <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y_{i}|X_{i},&space;\theta)&space;=&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y_{i}|X_{i},&space;\theta)&space;=&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" title="P(Y_{i}|X_{i}, \theta) = \frac{1}{\epsilon \sqrt{2\pi }}exp(-\frac{\left \| f(X_{i}) - Y_{i} \right \|^{2}}{2\delta ^{2}})" /></a>  
-    所以，整体预测正确的概率是：  
-    <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X,&space;\theta)&space;=\prod&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X,&space;\theta)&space;=\prod&space;\frac{1}{\epsilon&space;\sqrt{2\pi&space;}}exp(-\frac{\left&space;\|&space;f(X_{i})&space;-&space;Y_{i}&space;\right&space;\|^{2}}{2\delta&space;^{2}})" title="P(Y|X, \theta) =\prod \frac{1}{\epsilon \sqrt{2\pi }}exp(-\frac{\left \| f(X_{i}) - Y_{i} \right \|^{2}}{2\delta ^{2}})" /></a>  
-    根据极大似然估计，我们最后能够尽可能多地预测正确数据，所以我们要找到可以是似然函数（对数似然函数）最大的theta值。  
-    <a href="https://www.codecogs.com/eqnedit.php?latex=l(w)&space;=&space;logL(w)&space;=&space;\\&space;mlog\frac{1}{\sqrt{2\pi&space;}\delta&space;}&space;&plus;&space;nlog\frac{1}{\sqrt{2\pi&space;}\alpha&space;}&space;-&space;\frac{1}{\delta^{2}}&space;\cdot&space;\frac{1}{2}&space;\sum_{i&space;=&space;1}^{m}&space;(y^{i}&space;-&space;w^{T}x^{i})^{2}&space;-&space;\frac{1}{\alpha}&space;\cdot&space;\frac{1}{2}w^{T}w" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l(w)&space;=&space;logL(w)&space;=&space;\\&space;mlog\frac{1}{\sqrt{2\pi&space;}\delta&space;}&space;&plus;&space;nlog\frac{1}{\sqrt{2\pi&space;}\alpha&space;}&space;-&space;\frac{1}{\delta^{2}}&space;\cdot&space;\frac{1}{2}&space;\sum_{i&space;=&space;1}^{m}&space;(y^{i}&space;-&space;w^{T}x^{i})^{2}&space;-&space;\frac{1}{\alpha}&space;\cdot&space;\frac{1}{2}w^{T}w" title="l(w) = logL(w) = \\ mlog\frac{1}{\sqrt{2\pi }\delta } + nlog\frac{1}{\sqrt{2\pi }\alpha } - \frac{1}{\delta^{2}} \cdot \frac{1}{2} \sum_{i = 1}^{m} (y^{i} - w^{T}x^{i})^{2} - \frac{1}{\alpha} \cdot \frac{1}{2}w^{T}w" /></a>  
-    根据上式去求w的极值，去掉不需要的常量，可以得到：
+>`注:` `数学推导`  
+    规则化 = 加入参数的先验信息  
+    我们认为w满足拉普拉斯分布或者高斯分布，不是单纯的天马行空的取w的值，而是有一个限制。  
+    <a href="https://www.codecogs.com/eqnedit.php?latex=L(w)&space;=&space;p(y|X;w)p(w)=\prod_{i&space;=&space;1}^{m}p(y^{i}|x^{i};\theta)p(w)&space;\\=&space;\prod_{i&space;=&space;1}^{m}&space;\frac{1}{\sqrt{2\pi}\delta&space;}&space;exp(-\frac{(y^{i}&space;-&space;w^{T}x^{i})^{2}}{2\delta^{2}})&space;\frac{1}{\sqrt{2\pi}\alpha&space;}&space;exp(-&space;\frac{w^{T}w}{2\alpha&space;})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w)&space;=&space;p(y|X;w)p(w)=\prod_{i&space;=&space;1}^{m}p(y^{i}|x^{i};\theta)p(w)&space;\\=&space;\prod_{i&space;=&space;1}^{m}&space;\frac{1}{\sqrt{2\pi}\delta&space;}&space;exp(-\frac{(y^{i}&space;-&space;w^{T}x^{i})^{2}}{2\delta^{2}})&space;\frac{1}{\sqrt{2\pi}\alpha&space;}&space;exp(-&space;\frac{w^{T}w}{2\alpha&space;})" title="L(w) = p(y|X;w)p(w)=\prod_{i = 1}^{m}p(y^{i}|x^{i};\theta)p(w) \\= \prod_{i = 1}^{m} \frac{1}{\sqrt{2\pi}\delta } exp(-\frac{(y^{i} - w^{T}x^{i})^{2}}{2\delta^{2}}) \frac{1}{\sqrt{2\pi}\alpha } exp(- \frac{w^{T}w}{2\alpha })" /></a>  
+    两边取对数之后可以得到：
+    <a href="https://www.codecogs.com/eqnedit.php?latex=w_{MAP}&space;=&space;argmin(\frac{1}{\delta^{2}}&space;\cdot&space;\frac{1}{2}&space;\sum_{i&space;=&space;1}^{m}&space;(y^{i}&space;-&space;w^{T}x^{i})&space;^{2}&space;&plus;&space;\frac{1}{\alpha}&space;\cdot&space;\frac{1}{2}&space;w^{T}w)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w_{MAP}&space;=&space;argmin(\frac{1}{\delta^{2}}&space;\cdot&space;\frac{1}{2}&space;\sum_{i&space;=&space;1}^{m}&space;(y^{i}&space;-&space;w^{T}x^{i})&space;^{2}&space;&plus;&space;\frac{1}{\alpha}&space;\cdot&space;\frac{1}{2}&space;w^{T}w)" title="w_{MAP} = argmin(\frac{1}{\delta^{2}} \cdot \frac{1}{2} \sum_{i = 1}^{m} (y^{i} - w^{T}x^{i}) ^{2} + \frac{1}{\alpha} \cdot \frac{1}{2} w^{T}w)" /></a>  
+    即可等价于：  
     <a href="https://www.codecogs.com/eqnedit.php?latex=J_{R}(w)&space;=&space;\frac{1}{n}\left&space;\|&space;y&space;-&space;w^{T}X&space;\right&space;\|^{2}&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?J_{R}(w)&space;=&space;\frac{1}{n}\left&space;\|&space;y&space;-&space;w^{T}X&space;\right&space;\|^{2}&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|^{2}" title="J_{R}(w) = \frac{1}{n}\left \| y - w^{T}X \right \|^{2} + \lambda \left \| w \right \|^{2}" /></a>  
     这就是我们所说的Ridge Regression，增加了L2正则化之后的损失函数的形式。类似的，如果设定w满足拉普拉斯分布，则cost function会有一个线性项的形式。拉普拉斯分布的特殊形式会为参数带来稀疏化的优良特性。  
-  
+    
  `总结`
  >正则化参数等价于对参数引入先验分布，使得模型复杂度变小（缩小解空间），对于噪声以及 outliers 的鲁棒性增强（泛化能力）。整个最优化问题从贝叶斯观点来看是一种贝叶斯最大后验估计，其中正则化项对应后验估计中的先验信息，损失函数对应后验估计中的似然函数，两者的乘积即对应贝叶斯最大后验估计的形式。
- 
- 
     
-
+    
+    
 ## 优化方法
 
 ## 优缺点分析
