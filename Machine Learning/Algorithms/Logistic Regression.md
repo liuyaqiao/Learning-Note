@@ -70,7 +70,21 @@ L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩�
 <a href="https://www.codecogs.com/eqnedit.php?latex=J(w)&space;=&space;J(w)&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|_{p}\left\{\begin{matrix}&space;L_{1}\rightarrow&space;\left&space;\|&space;w&space;\right&space;\|_{1}\\L2\rightarrow&space;\frac{1}{2}\left&space;\|&space;w&space;\right&space;\|_{2}&space;^{2}&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?J(w)&space;=&space;J(w)&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|_{p}\left\{\begin{matrix}&space;L_{1}\rightarrow&space;\left&space;\|&space;w&space;\right&space;\|_{1}\\L2\rightarrow&space;\frac{1}{2}\left&space;\|&space;w&space;\right&space;\|_{2}&space;^{2}&space;\end{matrix}\right." title="J(w) = J(w) + \lambda \left \| w \right \|_{p}\left\{\begin{matrix} L_{1}\rightarrow \left \| w \right \|_{1}\\L2\rightarrow \frac{1}{2}\left \| w \right \|_{2} ^{2} \end{matrix}\right." /></a>  
 它们分别限制了参数的更新，
 
-总结起来就是：L1会引入稀疏性，而L2会充分利用更多的特征。
+![](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/regularization.png)  
+途中实线为参数w的等值线，虚线是L函数的图线。他们第一次相交的地方是最有解存在的取值。
+
+给我们的直观感受是L2对参数的正则更加的平滑，即它限制了参数空间，但对参数的影响是平滑的，不像L1那样，直接使得某些参数的取值为0。  
+
+总结起来就是：L1会引入`稀疏性`，而L2会充分利用更多的特征。  
+>为什么L1会引入稀疏性呢？
+1.图形角度
+从上图中可以看到，L1的的两条线大部分会在矩形角的位置相交。这个位置会有w的分量为0。试想，在高维w分量的时候，就会出现多个w分量为0的情况。从而导致稀疏矩阵的出现。而L2正则化就没有这样的性质，所以不会有太多的稀疏性出现。  
+2.先验角度      
+我们再来从先验概率的角度分析，L1 Regularization 是是认为数据服从拉普拉斯分布，L2 Regularization
+则认为数据服从高斯分布。其公式为:  
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" title="f(x) = \frac{1}{\sigma \sqrt{2\pi }}e^{-\frac{(x - \mu )^{2}}{2\sigma^{2}}}" /></a>  
+
 ## 优化方法
 
 ## 优缺点分析
