@@ -77,15 +77,15 @@ L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩�
 
 总结起来就是：L1会引入`稀疏性`，而L2会充分利用更多的特征。  
 >为什么L1会引入稀疏性呢？  
-1.图形角度
+1.图形角度  
 从上图中可以看到，L1的的两条线大部分会在矩形角的位置相交。这个位置会有w的分量为0。试想，在高维w分量的时候，就会出现多个w分量为0的情况。从而导致稀疏矩阵的出现。而L2正则化就没有这样的性质，所以不会有太多的稀疏性出现。  
 2.先验角度      
-我们再来从先验概率的角度分析，L1 Regularization 是是认为数据服从拉普拉斯分布，L2 Regularization
+我们再来从先验概率的角度分析，L1 Regularization 是认为数据服从拉普拉斯分布，L2 Regularization
 则认为数据服从高斯分布。其公式为:  
 <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" title="f(x) = \frac{1}{\sigma \sqrt{2\pi }}e^{-\frac{(x - \mu )^{2}}{2\sigma^{2}}}" /></a>  
 我们通过去对数似然函数的方法，可以分离出一个平方项。这就是L2的来源。而针对L1的数据，他们遵循拉普拉斯分布。
 <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" title="f(x) = \frac{1}{2\lambda }e^{-\frac{\left | x - \mu \right |}{\lambda }}" /></a>  
-![Laplace](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/laplace.jpg)
+![Laplace](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/laplace.jpg)  
 拉普拉斯分布所得到的对数似然函数的附加项是线性，也就是L1的形式。
 ## 优化方法
 
