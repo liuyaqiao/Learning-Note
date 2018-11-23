@@ -82,9 +82,11 @@ L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩�
 2.先验角度      
 我们再来从先验概率的角度分析，L1 Regularization 是是认为数据服从拉普拉斯分布，L2 Regularization
 则认为数据服从高斯分布。其公式为:  
-
 <a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{\sigma&space;\sqrt{2\pi&space;}}e^{-\frac{(x&space;-&space;\mu&space;)^{2}}{2\sigma^{2}}}" title="f(x) = \frac{1}{\sigma \sqrt{2\pi }}e^{-\frac{(x - \mu )^{2}}{2\sigma^{2}}}" /></a>  
-
+我们通过去对数似然函数的方法，可以分离出一个平方项。这就是L2的来源。而针对L1的数据，他们遵循拉普拉斯分布。
+<a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;\frac{1}{2\lambda&space;}e^{-\frac{\left&space;|&space;x&space;-&space;\mu&space;\right&space;|}{\lambda&space;}}" title="f(x) = \frac{1}{2\lambda }e^{-\frac{\left | x - \mu \right |}{\lambda }}" /></a>  
+![Laplace](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/laplace.jpg)
+拉普拉斯分布所得到的对数似然函数的附加项是线性，也就是L1的形式。
 ## 优化方法
 
 ## 优缺点分析
