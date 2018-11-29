@@ -8,7 +8,8 @@
 <a href="https://www.codecogs.com/eqnedit.php?latex=w^{T}x&space;&plus;&space;b&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w^{T}x&space;&plus;&space;b&space;=&space;0" title="w^{T}x + b = 0" /></a>,  
 其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原地之间的距离。空间中任意一点在这个超平民的距离可以表示为：
 <a href="https://www.codecogs.com/eqnedit.php?latex=r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" title="r = \frac{\left | w^{T} x + b \right |}{\left \| w \right \|}" /></a>  
-![SVM](https://github.com/liuyaqiao/Learning-Note/blob/master/svm.png)
+![SVM](https://github.com/liuyaqiao/Learning-Note/blob/master/svm.png)  
+如图所示，我们称距离超平面最近饿的这几个训练样本点
 
 >这里的公式可以通过一个线段到平面的投影来证明。
 
