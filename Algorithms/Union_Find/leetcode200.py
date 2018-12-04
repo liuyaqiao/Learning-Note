@@ -20,4 +20,4 @@ Input:
 
 Output: 3
 '''
-常见的BFS和DFS算法见 [leetcode200](https://github.com/liuyaqiao/Algorithms/commit/37323bc714cd42a676da9f9bbb3380ca475cc8cb)
+常见的BFS和DFS算法见
