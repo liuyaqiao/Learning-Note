@@ -23,7 +23,7 @@ Output: 3
 =======
 常见的BFS和DFS算法见
 [leetcode200](https://github.com/liuyaqiao/Algorithms/tree/master/src/200.py) 
->>>>>>> 05f252ad0b9ba77b78bafe9b0793decec040a5a8
+
 
 class Solution():   
     father = []
