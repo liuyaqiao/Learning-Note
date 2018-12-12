@@ -22,7 +22,7 @@ Output: 3
 '''
 
 常见的BFS和DFS算法见
-[leetcode200](https://github.com/liuyaqiao/Algorithms/tree/master/src/200.py) 
+[leetcode200](https://github.com/liuyaqiao/Algorithms/blob/master/src/200.py)
 
 ```
 class Solution():   
