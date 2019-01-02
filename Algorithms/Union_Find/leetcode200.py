@@ -24,6 +24,7 @@ Output: 3
 常见的BFS和DFS算法见
 [leetcode200](https://github.com/liuyaqiao/Algorithms/blob/master/src/200.py)
 
+
 ```
 class Solution():   
     father = []
@@ -73,6 +74,7 @@ class Solution():
         return count
     #筛选的时候要注意#
 ```
+
 其中有几个要注意的地方：
 1.要注意一下对row和col的取值范围，容易造成数组的越界。
 2.判断有几个连通区域的时候，使用father[i] 和 i比较的方法来决定
