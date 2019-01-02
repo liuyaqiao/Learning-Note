@@ -28,7 +28,7 @@
 
 
 -----------------
-我们规定函数的几何间隔和函数间隔：
+我们规定函数的几何间隔和函数间隔：  
 几何间隔：  
 <a href="https://www.codecogs.com/eqnedit.php?latex=\gamma&space;_{i}&space;=&space;y_{i}(wx_{i}&space;&plus;&space;b)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma&space;_{i}&space;=&space;y_{i}(wx_{i}&space;&plus;&space;b)" title="\gamma _{i} = y_{i}(wx_{i} + b)" /></a>  
 函数间隔：  
