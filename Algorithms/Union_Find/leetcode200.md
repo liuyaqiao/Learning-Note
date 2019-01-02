@@ -1,30 +1,25 @@
 '''
 Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
-
 Example 1:
-
 Input:
 11110
 11010
 11000
 00000
-
 Output: 1
 Example 2:
-
 Input:
 11000
 11000
 00100
 00011
-
 Output: 3
 '''
-=======
-常见的BFS和DFS算法见
-[leetcode200](https://github.com/liuyaqiao/Algorithms/tree/master/src/200.py) 
->>>>>>> 05f252ad0b9ba77b78bafe9b0793decec040a5a8
 
+常见的BFS和DFS算法见
+[leetcode200](https://github.com/liuyaqiao/Algorithms/blob/master/src/200.py)
+
+```
 class Solution():   
     father = []
        
@@ -63,13 +58,14 @@ class Solution():
                     k = i * cols + j
                     self.father[k] = -1
         count = 0
-	#需要注意的是i的取值范围是rows - 1#
-	#对k的i*cols+j的取值#
-	#筛选的时候通过i和father[i]的值来判断#
-
+        
         for i in range(cols * rows):
             if self.father[i] == i:
                 count += 1
         return count
-    #筛选的时候要注意#
+```
+其中有几个要注意的地方：  
+1.要注意一下对row和col的取值范围，容易造成数组的越界。
+2.判断有几个连通区域的时候，使用father[i] 和 i比较的方法来决定
+3.这里可以使用一个简单的循环来遍历整个图。具体见下面的代码：
 
