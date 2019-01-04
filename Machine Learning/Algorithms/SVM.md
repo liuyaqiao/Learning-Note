@@ -22,7 +22,7 @@
 <a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;min\quad&space;\frac{1}{2}||w||^{2}\\s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;min\quad&space;\frac{1}{2}||w||^{2}\\s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}\right." title="\left\{\begin{matrix} min\quad \frac{1}{2}||w||^{2}\\s.t. \quad y_{i}(w^{T}x_{i} + b) \geq 1, \quad i = 1,2,3 \end{matrix}\right." /></a>  
 上式就是支持向量机的基本型。  
 用通俗的话来讲，这是一个有约束条件的最优化问题。约束条件是样本空间，最优化的目标是我们取的分类标准。用一句话概括：svm是在当前样本空间中，寻找一个使得异类样本之间具有最大距离的超平面（分类器）。  
-这里我们构成了一个凸优化的问题，因为所优化项本身是一个凸二次规划问题，可以有现成的包求解，但是我们具有更好的解决办法。（见下文）
+这里我们构成了一个凸优化的问题，因为所优化项本身是一个**凸二次规划问题**，可以有现成的包求解，但是我们具有更好的解决办法。（见下文）
 
 ## 数学处理（拉格朗日乘子、对偶问题和KKT条件）
 首先说一下整体的推导思路：  
@@ -38,8 +38,22 @@
 >这里注明一下必要条件：
 例如在有等式约束的最优化问题中，我们构造的拉格朗日量对约束量偏导为0是取得极值的必要条件指的是，取得函数极值我们一定有偏导数为0，但是偏导数为0不一定会取得极值，我们还需要根据偏导数对函数大小进行比较。而KKT条件则是不等式约束条件下的优化函数取得极值的必要条件。  
 之后如果有时间会写一篇[KKT条件的推导]!!!!!!!!!!!!!!  
-2.  拉格朗日乘子法
-3.  对偶问题
+2.  拉格朗日乘子法  
+我们根据拉格朗日乘子法可以得到如下的拉氏量:  
+<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
+这里我们规定a均大于等于0.（？？？）
+3.  对偶问题  
+上述问题我们通过求导的方法仍然不容易求解，所以我们为了构造更加容易求解的最优化形式，来构造对偶问题。上式可以等价于:  
+<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))" /></a>  
+Proof:  
+<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min_{b,w}max_{a_{n}\geq 0}(\frac{1}{2}||w||^{2} + a_{n} (1 - y_{n}(w^{T} x_{i} + b_{i}))) \\ = min_{b, w}(\infty \text{ if violate}; \frac{1}{2} ||w||^{2} \text{ if feasible})" /></a>  
+如果有任何违反规则，第二项大于0，则最大值会趋紧于正无穷。  
+如果所有的点都符合的话，第二项小于0，最大值则为0. 
+这时我们已经把限制条件加入到了max中。即可得到，    
+<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min(\frac{1}{2}||w||^{2}), \text{meet constrains}" /></a>  
+
+
+
 4.  
 
 我们试图找出这个凸优化问题的对偶问题：  
