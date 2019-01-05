@@ -73,11 +73,16 @@ Proof:
 1.  凸函数（convex primal）
 2.  有解（feasible primal）
 3.  线性条件（linear constraints）  
+这里也叫做slater条件，我们构造出的拉格朗日对偶问题满足了slater条件，即它是一个强对偶问题。（具体的数学表达自行wiki）  
 可以证明这里的拉格朗日函数满足强对偶的条件，所以这里可以来解它的对偶问题。（满足强对偶问题的函数在取到最优值的时候均满足KKT条件，即KKT条件是强对偶问题的必要条件，这里林轩田老师的机器学习技法课程中给了更为详细的推导 ，本文就不详细展开，我们直接使用这个结论）即：  
 
 5.  KKT条件：
-首先用一幅图来说明规范性条件、KKT条件和强对偶之间的关系：  
-![KKT](https://github.com/liuyaqiao/Learning-Note/blob/master/RC_KKT_DUAL.png)
+&ensp;&ensp;&ensp;&ensp;首先用一幅图来说明规范性条件、KKT条件和强对偶之间的关系：  
+&ensp;&ensp;&ensp;&ensp;![KKT](https://github.com/liuyaqiao/Learning-Note/blob/master/RC_KKT_DUAL.png)  
+&ensp;&ensp;&ensp;&ensp;(转自知乎用户徐林杰[link](https://zhuanlan.zhihu.com/p/36621652))  
+&ensp;&ensp;&ensp;&ensp;大体来说，KKT条件是一个不等式约束条件取得极值的必要条件，但是KKT条件并不一定所有情况都满足。要满足KKT条件需要有一个规范性条件（Regularity conditions），为的是要求约束条件的质量不能太差。强对偶性质非常好，但是要求也很苛刻，比 KKT 条件要苛刻。如果问题满足强对偶一定也满足 KKT 条件，反之不一定。
+&ensp;&ensp;&ensp;&ensp;接着，我们来具体看一下KKT条件到底是什么：
+
 
 
 使用[拉格朗日乘子法](https://www.cnblogs.com/sddai/p/5728195.html)对x求偏导来得到对偶问题，可以得到：  
