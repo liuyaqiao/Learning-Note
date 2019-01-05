@@ -2,16 +2,16 @@
 >简介：
 >定义在特征空间上的间隔最大的分类器。
 ## 出发点和思路
-我们在空间中可以找到无数条线做分类，都可以达到分类的效果。但是分类器有好坏之分，我们的出发点是选择一个能起到最好的分类效果的分类器。从直观上看，我们应该寻找在所有样本最中间的一条直线做为最终的分类器，这样的分类器对噪音容忍度比较高，对未知数据的泛化能力比较强。  
+&ensp;&ensp;&ensp;&ensp;我们在空间中可以找到无数条线做分类，都可以达到分类的效果。但是分类器有好坏之分，我们的出发点是选择一个能起到最好的分类效果的分类器。这就是我们的出发点。从直观上看，我们应该寻找在所有样本最中间的一条直线做为最终的分类器，这样的分类器对噪音容忍度比较高，对未知数据的泛化能力比较强。  
 ## 间隔公式
-在样本空间，划分超平面可以通过如下的线性方程来描述：  
+&ensp;&ensp;&ensp;&ensp;在样本空间，划分超平面可以通过如下的线性方程来描述：  
 <a href="https://www.codecogs.com/eqnedit.php?latex=w^{T}x&space;&plus;&space;b&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w^{T}x&space;&plus;&space;b&space;=&space;0" title="w^{T}x + b = 0" /></a>,  
-其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原地之间的距离。空间中任意一点在这个超平面的距离可以表示为：
+&ensp;&ensp;&ensp;&ensp;其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原地之间的距离。空间中任意一点在这个超平面的距离可以表示为：
 <a href="https://www.codecogs.com/eqnedit.php?latex=r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" title="r = \frac{\left | w^{T} x + b \right |}{\left \| w \right \|}" /></a>  
 >以下是推导过程：  
 ![SVM](https://github.com/liuyaqiao/Learning-Note/blob/master/svm.png)  
-如图所示，我们称距离超平面最近的这几个训练样本点称为支持向量。把直线取在支持向量的中间，我们可以认为所得的距离最大。  
-假设超平面可以将分类样本分类正确，对于y = 1, 则有wx + b >= 1（这里根据距离公式可以得到，正确分类的距离r >= 1/||w||，之后加上label对样本的影响），若y = -1，则有wx + b <= -1。我们通过对距离公式中w的变换，可以得到：  
+&ensp;&ensp;&ensp;&ensp;如图所示，我们称距离超平面最近的这几个训练样本点称为支持向量。把直线取在支持向量的中间，我们可以认为所得的距离最大。  
+&ensp;&ensp;&ensp;&ensp;假设超平面可以将分类样本分类正确，对于y = 1, 则有wx + b >= 1（这里根据距离公式可以得到，正确分类的距离r >= 1/||w||，之后加上label对样本的影响），若y = -1，则有wx + b <= -1。我们通过对距离公式中w的变换，可以得到：  
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;w^{T}x&space;&plus;&space;b&space;\geq&space;&plus;1,&space;y_{i}&space;=&space;&plus;1\\&space;w^{T}x&space;&plus;&space;b&space;\leq&space;-1,&space;y_{i}&space;=&space;-1&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;w^{T}x&space;&plus;&space;b&space;\geq&space;&plus;1,&space;y_{i}&space;=&space;&plus;1\\&space;w^{T}x&space;&plus;&space;b&space;\leq&space;-1,&space;y_{i}&space;=&space;-1&space;\end{matrix}\right." title="\left\{\begin{matrix} w^{T}x + b \geq +1, y_{i} = +1\\ w^{T}x + b \leq -1, y_{i} = -1 \end{matrix}\right." /></a>  
 >这里是规定强行规定了1和-1的间隔值）。如果超平面总能将训练样本分开，则可以通过对w、b的线性变换和最优化函数的参数改变，使得距离变成1.  
@@ -20,19 +20,18 @@
 同理，上述的最优化问题等价于：  
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;min\quad&space;\frac{1}{2}||w||^{2}\\s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;min\quad&space;\frac{1}{2}||w||^{2}\\s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}\right." title="\left\{\begin{matrix} min\quad \frac{1}{2}||w||^{2}\\s.t. \quad y_{i}(w^{T}x_{i} + b) \geq 1, \quad i = 1,2,3 \end{matrix}\right." /></a>  
-上式就是支持向量机的基本型。  
-用通俗的话来讲，这是一个有约束条件的最优化问题。约束条件是样本空间，最优化的目标是我们取的分类标准。用一句话概括：svm是在当前样本空间中，寻找一个使得异类样本之间具有最大距离的超平面（分类器）。  
-这里我们构成了一个凸优化的问题，因为所优化项本身是一个**凸二次规划问题**，可以有现成的包求解，但是我们具有更好的解决办法。（见下文）
+&ensp;&ensp;&ensp;&ensp;上式就是支持向量机的基本型。  
+&ensp;&ensp;&ensp;&ensp;用通俗的话来讲，这是一个有约束条件的最优化问题。约束条件是样本空间，最优化的目标是我们取的分类标准。用一句话概括：svm是在当前样本空间中，寻找一个使得异类样本之间具有最大距离的超平面（分类器）。  
+&ensp;&ensp;&ensp;&ensp;这里我们构成了一个凸优化的问题，因为所优化项本身是一个**凸二次规划问题**，可以有现成的包求解，但是我们具有更好的解决办法。（见下文）
 
 ## 数学处理（拉格朗日乘子、对偶问题和KKT条件）
-首先说一下整体的推导思路：  
-首先我们得到一个**有约束的最优化问题**，这时我们考虑已经的梯度下降（gradient descent）等方法去处理，但是由于条件的限制导致这个问题不是很好处理。所以我们要考虑讲问题转化成**没有约束条件的最优化问题**，这时我们采用了**拉格朗日乘子法**。  
-我们本来可以通过求导的方法取求解这个问题，但是这时计算的过程过于复杂，所以我们考虑通过构造**拉格朗日对偶问题**来解决这个复杂计算的问题。  
-为了保证原问题和对偶问题所求的结果一致，我们需要证明这个问题满足**强对偶关系**。  
-经过证明之后，我们可以使用经过证明的对偶问题是原问题具有相同的解。  
-而**KKT条件**，则是**不等式约束下的最优化问题有解**、**构造对偶问题**和证明**强对偶关系**都需要用到的条件，可以说是整个理论的一个纽带。  
+&ensp;&ensp;&ensp;&ensp;首先说一下整体的推导思路：  
+&ensp;&ensp;&ensp;&ensp;首先我们得到一个**有约束的最优化问题**，这时我们考虑已经的梯度下降（gradient descent）等方法去处理，但是由于条件的限制导致这个问题不是很好处理。所以我们要考虑讲问题转化成**没有约束条件的最优化问题**，这时我们采用了**拉格朗日乘子法**。  
+&ensp;&ensp;&ensp;&ensp;我们本来可以通过求导的方法取求解这个问题，但是这时计算的过程过于复杂，所以我们考虑通过构造**拉格朗日对偶问题**来解决这个复杂计算的问题。  
+&ensp;&ensp;&ensp;&ensp;为了保证原问题和对偶问题所求的结果一致，我们需要证明这个问题满足**强对偶关系**。经过证明之后，我们可以使用经过证明的对偶问题是原问题具有相同的解。  
+&ensp;&ensp;&ensp;&ensp;而**KKT条件**，则是**不等式约束下的最优化问题有解**、**构造对偶问题**和证明**强对偶关系**都需要用到的条件，可以说是整个理论的一个纽带。  
 
-总结来说，我们是通过构造一个满足强对偶关系的拉格朗日对偶问题来求解SVM。
+&ensp;&ensp;&ensp;&ensp;总结来说，我们是通过构造一个满足强对偶关系的拉格朗日对偶问题来求解SVM。下面分别介绍一下：有约束的最优化问题、拉格朗日乘子法、拉格朗日对偶问题、强对偶问题和KKT条件五个方面来jie s
   
 1.  上文中我们提到[有约束的最优化问题](https://zhuanlan.zhihu.com/p/26514613)，见参考文献，我们这里属于在不等式约束下的最优化问题，它取得极值的必要条件应该是KKT条件。
 >这里注明一下必要条件：
@@ -43,9 +42,9 @@
 <a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
 这里我们规定a均大于等于0。为什么呢？这里要参考一下有约束的最优化问题的不等式，要取得最优值必须满足kkt条件（KKT条件是取得最优值的必要条件）：  
 KKT条件为：
-1. 经过经过拉格朗日函数处理之后的新目标函数L(w,b,α)对x求导为零：  
-2.  <a href="https://www.codecogs.com/eqnedit.php?latex=h_j(x)=0；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_j(x)=0；" title="h_j(x)=0；" /></a>
-3.  <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha*g_k(k)=0&space;；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha*g_k(k)=0&space;；" title="\alpha*g_k(k)=0 ；" /></a>  
+    1. 经过经过拉格朗日函数处理之后的新目标函数L(w,b,α)对x求导为零：  
+    2.  <a href="https://www.codecogs.com/eqnedit.php?latex=h_j(x)=0；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_j(x)=0；" title="h_j(x)=0；" /></a>
+    3.  <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha*g_k(k)=0&space;；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha*g_k(k)=0&space;；" title="\alpha*g_k(k)=0 ；" /></a>  
 对于我们的优化问题，条件二是满足的。也可以证明另外两个条件也满足，通过强对偶关系满足的kkt条件来证明。[参考](https://link.zhihu.com/?target=http%3A//blog.csdn.net/xianlingmao/article/details/7919597)
 
 3.  对偶问题  
