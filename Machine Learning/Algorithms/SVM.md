@@ -42,7 +42,7 @@
 我们根据拉格朗日乘子法可以得到如下的拉氏量:  
 <a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
 这里我们规定a均大于等于0，为什么呢？这里要参考一下有约束的最优化问题的不等式，要取得最优值必须满足kkt条件（KKT条件是取得最优值的必要条件）：  
-KKT条件为：
+KKT条件为：  
     1. 经过经过拉格朗日函数处理之后的新目标函数L(w,b,α)对x求导为零：  
     2.  <a href="https://www.codecogs.com/eqnedit.php?latex=h_j(x)=0；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_j(x)=0；" title="h_j(x)=0；" /></a>
     3.  <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha*g_k(k)=0&space;；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha*g_k(k)=0&space;；" title="\alpha*g_k(k)=0 ；" /></a>
@@ -76,12 +76,22 @@ Proof:
 这里也叫做slater条件，我们构造出的拉格朗日对偶问题满足了slater条件，即它是一个强对偶问题。（具体的数学表达自行wiki）  
 可以证明这里的拉格朗日函数满足强对偶的条件，所以这里可以来解它的对偶问题。（满足强对偶问题的函数在取到最优值的时候均满足KKT条件，即KKT条件是强对偶问题的必要条件，这里林轩田老师的机器学习技法课程中给了更为详细的推导 ，本文就不详细展开，我们直接使用这个结论）即：  
 
-5.  KKT条件：
+5.  KKT条件：  
 &ensp;&ensp;&ensp;&ensp;首先用一幅图来说明规范性条件、KKT条件和强对偶之间的关系：  
 &ensp;&ensp;&ensp;&ensp;![KKT](https://github.com/liuyaqiao/Learning-Note/blob/master/RC_KKT_DUAL.png)  
 &ensp;&ensp;&ensp;&ensp;(转自知乎用户徐林杰[link](https://zhuanlan.zhihu.com/p/36621652))  
 &ensp;&ensp;&ensp;&ensp;大体来说，KKT条件是一个不等式约束条件取得极值的必要条件，但是KKT条件并不一定所有情况都满足。要满足KKT条件需要有一个规范性条件（Regularity conditions），为的是要求约束条件的质量不能太差。强对偶性质非常好，但是要求也很苛刻，比 KKT 条件要苛刻。如果问题满足强对偶一定也满足 KKT 条件，反之不一定。
 &ensp;&ensp;&ensp;&ensp;接着，我们来具体看一下KKT条件到底是什么：
+&ensp;&ensp;&ensp;&ensp;对于具有等式和不等式约束的一般优化问题：
+<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" title="\begin{matrix} minf(x)\\ s.t.g_{j}(x) \leq 0(j = 1,2\cdot \cdot \\ h_{k}(x) = 0(k = 1,2,\cdot\cdot,l) \end{matrix}" /></a>  
+&ensp;&ensp;&ensp;&ensp;KKT条件给出了判断\[{{\bf{x}}^*}\]是否为最优解的**必要条件**，即：  
+<a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." title="\left\{\begin{matrix} && \frac{\partial f}{\partial x_{i}} + \sum_{j = 1}^{m}\mu_{j}\frac{\partial g_{i}}{\partial x_{i}} + \sum_{k = 1}^{l}\lambda _{k}\frac{\partial h_{k}}{\partial x_{i}} = 0, (i = 1,2,...,n) \\ && h_{k}(x) = 0, (k = 1,2,...,l) \\ && \mu _{j}g_{j} = 0, (j = 1,2,..., m) \\ && \mu_{j} \geq 0 \end{matrix}\right." /></a>
+
+
+
+
+
+
 
 
 
