@@ -58,11 +58,11 @@ Proof:
 如果所有的点都符合的话，第二项小于0，最大值则为0. 
 此时我们已经把限制条件加入到了max中，可以保证在符合约束条件的情况下，该构造的函数和原函数的优化结果相同。即可得到，    
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min(\frac{1}{2}||w||^{2}), \text{meet constrains}" /></a>  
-&ensp;&ensp;&ensp;&ensp;这个问题的对偶问题为：  
+这个问题的对偶问题为：  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" title="\begin{matrix} max_{a}min_{b,w}\text{ }L(b,w,a)\\ s.t.\quad a_{i} \geq 0 \end{matrix}" /></a>  
-&ensp;&ensp;&ensp;&ensp;根据对偶函数的性质（见周志华西瓜书附录405页），对偶函数给出了主问题最优值的下界，即有：  
+根据对偶函数的性质（见周志华西瓜书附录405页），对偶函数给出了主问题最优值的下界，即有：  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
-&ensp;&ensp;&ensp;&ensp;我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
+我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
 
 4.  强对偶问题的证明：
 
