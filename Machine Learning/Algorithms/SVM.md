@@ -5,9 +5,9 @@
 &ensp;&ensp;&ensp;&ensp;我们在空间中可以找到无数条线做分类，都可以达到分类的效果。但是分类器有好坏之分，我们的出发点是选择一个能起到最好的分类效果的分类器。这就是我们的出发点。从直观上看，我们应该寻找在所有样本最中间的一条直线做为最终的分类器，这样的分类器对噪音容忍度比较高，对未知数据的泛化能力比较强。  
 ## 间隔公式
 &ensp;&ensp;&ensp;&ensp;在样本空间，划分超平面可以通过如下的线性方程来描述：  
-<a href="https://www.codecogs.com/eqnedit.php?latex=w^{T}x&space;&plus;&space;b&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w^{T}x&space;&plus;&space;b&space;=&space;0" title="w^{T}x + b = 0" /></a>,  
-&ensp;&ensp;&ensp;&ensp;其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原地之间的距离。空间中任意一点在这个超平面的距离可以表示为：
-<a href="https://www.codecogs.com/eqnedit.php?latex=r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" title="r = \frac{\left | w^{T} x + b \right |}{\left \| w \right \|}" /></a>  
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=w^{T}x&space;&plus;&space;b&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w^{T}x&space;&plus;&space;b&space;=&space;0" title="w^{T}x + b = 0" /></a>,  
+&ensp;&ensp;&ensp;&ensp;其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原地之间的距离。空间中任意一点在这个超平面的距离可以表示为：  
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" title="r = \frac{\left | w^{T} x + b \right |}{\left \| w \right \|}" /></a>  
 >以下是推导过程：  
 ![SVM](https://github.com/liuyaqiao/Learning-Note/blob/master/svm.png)  
 &ensp;&ensp;&ensp;&ensp;如图所示，我们称距离超平面最近的这几个训练样本点称为支持向量。把直线取在支持向量的中间，我们可以认为所得的距离最大。  
