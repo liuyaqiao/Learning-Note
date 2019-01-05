@@ -82,12 +82,14 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;(转自知乎用户徐林杰[link](https://zhuanlan.zhihu.com/p/36621652))  
 &ensp;&ensp;&ensp;&ensp;大体来说，KKT条件是一个不等式约束条件取得极值的必要条件，但是KKT条件并不一定所有情况都满足。要满足KKT条件需要有一个规范性条件（Regularity conditions），为的是要求约束条件的质量不能太差。强对偶性质非常好，但是要求也很苛刻，比 KKT 条件要苛刻。如果问题满足强对偶一定也满足 KKT 条件，反之不一定。
 &ensp;&ensp;&ensp;&ensp;接着，我们来具体看一下KKT条件到底是什么：
-&ensp;&ensp;&ensp;&ensp;对于具有等式和不等式约束的一般优化问题：
-<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" title="\begin{matrix} minf(x)\\ s.t.g_{j}(x) \leq 0(j = 1,2\cdot \cdot \\ h_{k}(x) = 0(k = 1,2,\cdot\cdot,l) \end{matrix}" /></a>  
+&ensp;&ensp;&ensp;&ensp;对于具有等式和不等式约束的一般优化问题：  
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" title="\begin{matrix} minf(x)\\ s.t.g_{j}(x) \leq 0(j = 1,2\cdot \cdot \\ h_{k}(x) = 0(k = 1,2,\cdot\cdot,l) \end{matrix}" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;KKT条件给出了判断\[{{\bf{x}}^*}\]是否为最优解的**必要条件**，即：  
-<a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." title="\left\{\begin{matrix} && \frac{\partial f}{\partial x_{i}} + \sum_{j = 1}^{m}\mu_{j}\frac{\partial g_{i}}{\partial x_{i}} + \sum_{k = 1}^{l}\lambda _{k}\frac{\partial h_{k}}{\partial x_{i}} = 0, (i = 1,2,...,n) \\ && h_{k}(x) = 0, (k = 1,2,...,l) \\ && \mu _{j}g_{j} = 0, (j = 1,2,..., m) \\ && \mu_{j} \geq 0 \end{matrix}\right." /></a>
 
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." title="\left\{\begin{matrix} && \frac{\partial f}{\partial x_{i}} + \sum_{j = 1}^{m}\mu_{j}\frac{\partial g_{i}}{\partial x_{i}} + \sum_{k = 1}^{l}\lambda _{k}\frac{\partial h_{k}}{\partial x_{i}} = 0, (i = 1,2,...,n) \\ && h_{k}(x) = 0, (k = 1,2,...,l) \\ && \mu _{j}g_{j} = 0, (j = 1,2,..., m) \\ && \mu_{j} \geq 0 \end{matrix}\right." /></a>
 
+&ensp;&ensp;&ensp;&ensp;接着，我们根据KKT条件是取得最优值的必要条件取解决对偶问题。
 
 
 
@@ -102,6 +104,10 @@ Proof:
 我们去试图找出这个问题的
 
 [约束问题](https://zhuanlan.zhihu.com/p/26514613) 
+
+
+
+
 
 ## 松弛支持向量机
 
