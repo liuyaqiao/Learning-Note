@@ -86,7 +86,7 @@ Proof:
 
 我们去试图找出这个问题的
 
-[约束问题](https://zhuanlan.zhihu.com/p/26514613)
+[约束问题](https://zhuanlan.zhihu.com/p/26514613) 
 
 ## 松弛支持向量机
 
