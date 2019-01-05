@@ -11,7 +11,7 @@
 &ensp;&ensp;&ensp;&ensp;我们通过这个距离公式和约束条件就可以推导出SVM的基本型：  
 >以下是推导过程：  
 ![SVM](https://github.com/liuyaqiao/Learning-Note/blob/master/svm.png)  
-&ensp;&ensp;&ensp;&ensp;如图所示，我们认为把直线取在最近异类样本的中间，我们可以认为所得的距离最大。  
+&ensp;&ensp;&ensp;&ensp;如图所示，我们认为把直线取在最近异类样本的中间，我们可以认为所得到的分类器对所有样本的容忍程度最好，用数学的描述就是最近异类样本之间的距离最大。  
 &ensp;&ensp;&ensp;&ensp;假设超平面可以将分类样本分类正确，对于y = 1, 则有wx + b >= 1（这里根据距离公式可以得到，正确分类的距离r >= 1/||w||，之后加上label对样本的影响），若y = -1，则有wx + b <= -1。我们通过对距离公式中w的变换，可以得到：  
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;w^{T}x&space;&plus;&space;b&space;\geq&space;&plus;1,&space;y_{i}&space;=&space;&plus;1\\&space;w^{T}x&space;&plus;&space;b&space;\leq&space;-1,&space;y_{i}&space;=&space;-1&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;w^{T}x&space;&plus;&space;b&space;\geq&space;&plus;1,&space;y_{i}&space;=&space;&plus;1\\&space;w^{T}x&space;&plus;&space;b&space;\leq&space;-1,&space;y_{i}&space;=&space;-1&space;\end{matrix}\right." title="\left\{\begin{matrix} w^{T}x + b \geq +1, y_{i} = +1\\ w^{T}x + b \leq -1, y_{i} = -1 \end{matrix}\right." /></a>  
