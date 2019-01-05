@@ -6,8 +6,9 @@
 ## 间隔公式
 &ensp;&ensp;&ensp;&ensp;在样本空间，划分超平面可以通过如下的线性方程来描述：  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=w^{T}x&space;&plus;&space;b&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w^{T}x&space;&plus;&space;b&space;=&space;0" title="w^{T}x + b = 0" /></a>,  
-&ensp;&ensp;&ensp;&ensp;其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原点之间的距离。空间中任意一点在这个超平面的距离可以表示为：  
+&ensp;&ensp;&ensp;&ensp;其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原点之间的距离。空间中任意一点到这个超平面的距离可以表示为：  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" title="r = \frac{\left | w^{T} x + b \right |}{\left \| w \right \|}" /></a>  
+&ensp;&ensp;&ensp;&ensp;我们通过这个距离公式和约束条件就可以推导出SVM的基本型：  
 >以下是推导过程：  
 ![SVM](https://github.com/liuyaqiao/Learning-Note/blob/master/svm.png)  
 &ensp;&ensp;&ensp;&ensp;如图所示，我们称距离超平面最近的这几个训练样本点称为支持向量。把直线取在支持向量的中间，我们可以认为所得的距离最大。  
