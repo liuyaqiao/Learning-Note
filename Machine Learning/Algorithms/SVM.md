@@ -50,7 +50,10 @@ KKT条件为：
 对于我们的优化问题，条件二是满足的（相当于没有这一项）。也可以证明另外两个条件也满足，通过强对偶关系满足的KKT条件来证明。[参考](https://link.zhihu.com/?target=http%3A//blog.csdn.net/xianlingmao/article/details/7919597)
 
 3.  对偶问题  
-上述问题我们通过求导的方法仍然不容易求解，所以我们为了构造更加容易求解的最优化形式，来构造对偶问题。根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即minL(w,b,a)。该式可以等价于:  
+>**对偶问题**：  
+Dual problem 跟primal problem 可以看成本来是两个问题，因为优化的顺序不同而会得出两个不一定相关的值（但是minmaxf(x,y) >= maxminf(x,y)还是成立的，直观理解的话高中经常用的二次函数就可以了）。两者的差值就是duality gap，描述了我用另一种方式刻画问题的时候所造成的误差，强对偶的情况下最优值没有差别。在最优点处将会满足KKT 条件，但是KKT条件本身并不需要问题满足强对偶。([转自知乎atom Native](https://www.zhihu.com/question/58584814/answer/159079694))  
+
+根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即min L(w,b,a)，但是用求导的方法求解它仍然不容易，所以我们来构造更加简单的对偶的形式来求解。该式可以等价于:  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))" /></a>  
 Proof:  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min_{b,w}max_{a_{n}\geq 0}(\frac{1}{2}||w||^{2} + a_{n} (1 - y_{n}(w^{T} x_{i} + b_{i}))) \\ = min_{b, w}(\infty \text{ if violate}; \frac{1}{2} ||w||^{2} \text{ if feasible})" /></a>  
@@ -58,24 +61,20 @@ Proof:
 如果所有的点都符合的话，第二项小于0，最大值则为0. 
 此时我们已经把限制条件加入到了max中，可以保证在符合约束条件的情况下，该构造的函数和原函数的优化结果相同。即可得到，    
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min(\frac{1}{2}||w||^{2}), \text{meet constrains}" /></a>  
-这个问题的对偶问题为：  
+我们交换max和min的顺序，得到这个问题的对偶问题为：  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" title="\begin{matrix} max_{a}min_{b,w}\text{ }L(b,w,a)\\ s.t.\quad a_{i} \geq 0 \end{matrix}" /></a>  
 根据对偶函数的性质（见周志华西瓜书附录405页），对偶函数给出了主问题最优值的下界，即有：  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
 我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
 
 4.  强对偶问题的证明：
-
->对偶问题：  
-一个优化问题可以从主问题和对偶问题两个角度来考虑。一般来说，对偶问题给出了最优值的下界，这个下界取决于拉格朗日函数引入的参数的取值。但是，基于对偶函数可以取到的最好的下界是什么？这是我们关注的问题，这里可以引入一个关于参数的max的最优化问题，这就是原问题的对偶问题，这一定是一个凸优化问题：  
-对于原函数是凸函数的情况，在特定条件下，强对偶性成立（min最优值和max最优质相等 ），可以通过这个关系来求解主问题。
-
 >强对偶问题：  
 对于一个二次规划问题，强对偶关系存在有三个条件：  
 1.  凸函数（convex primal）
 2.  有解（feasible primal）
 3.  线性条件（linear constraints）  
 可以证明这里的拉格朗日函数满足强对偶的条件，所以这里可以来解它的对偶问题。（满足强对偶问题的函数均满足KKT条件，即KKT条件是强对偶问题的必要条件，这里林轩田老师的机器学习技法课程中给了更为详细的推导 ，本文就不详细展开，我们直接使用这个结论）即：  
+
 
 
 
