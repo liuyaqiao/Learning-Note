@@ -161,9 +161,19 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;我们可以发现，根据C的取值不同，可以限制不满足条件样本的数目。这里，当C为有限值的时候，可以允许一些不满足的条件的样本。
 &ensp;&ensp;&ensp;&ensp;我们发现，0-1误差函数非凸、非连续，数学性质不太好，代入优化函数中不好直接求解，所以我们想办法找出一些函数去替代l，这里我们称为替代损失（surrogate loss）。这些函数常常具有比较好的数学性质（连续，凸函数），并且都给出了0-1误差的上界。
 
-- hinge loss
+- hinge loss 
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=l_{hinge}(z)&space;=&space;max(0,&space;1&space;-&space;z)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{hinge}(z)&space;=&space;max(0,&space;1&space;-&space;z)" title="l_{hinge}(z) = max(0, 1 - z)" /></a>
+
 - exponential loss
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=l_{exp}(z)&space;=&space;exp(-z)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{exp}(z)&space;=&space;exp(-z)" title="l_{exp}(z) = exp(-z)" /></a>
+
 - logistic loss
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=l_{log}(z)&space;=&space;log(1&space;&plus;&space;exp(-z))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{log}(z)&space;=&space;log(1&space;&plus;&space;exp(-z))" title="l_{log}(z) = log(1 + exp(-z))" /></a>
+
+这里简要分析一下hinge的思路，如果出现了偏移量比较大的样本的时候，会对之前的0-1误差的损失函数带来比较大的影响。而hinge loss会尽量的减少这种情况带来的影响，它只是求了max(0, 1 - z)。针对远偏离的数据点，这里也只会取到max = 1，消除了这种outliner点对优化的影响。也可以证明，经过了hinge loss处理之后，优化的结果仍然只和支持向量有关，仍然保持了稀疏性。
 
 &ensp;&ensp;&ensp;&ensp;我们在这里会采用hinge loss，则优化的公式变成：
 
@@ -182,11 +192,17 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;我们还发现，如果替代损失采用不同的函数的话，会得到很多不同的结果，如果采用
 
 
-svm与lr
+- svm与lr
+&ensp;&ensp;&ensp;&ensp;如果用对数几率损失函数去代替hinge损失函数则可以得到类似LR的误差函数形式。这实际上可以说明，SVM和LR的优化目标想尽，通常情况下，他们的性能也相当。
 
-误差分类
+这两个损失函数的本质目的是一样的，都是为了增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的hinge的处理方法是，只考虑SV，去学习分类器。而LR是通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。SVM考虑了局部，而LR则考虑了全局。
 
-svm与正则化
+[参考文献](https://blog.csdn.net/jfhdd/article/details/52319422)
+
+
+- 误差分类
+
+- svm与正则化
 
 
 
