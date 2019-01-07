@@ -147,12 +147,29 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;之前我们讨论的情况都是假定在样本空间或特征空间是线性可分的，即存在一个超平面将不同类的样本完全划分开。但是在现实情况中，往往很难确定合适的核函数使得训练样本在特征空间线性可分；退一步说，即使找到这个线性可分的超平面，也很难确定这个貌似线性可分的结果是不是由过拟合所造成的。
 &ensp;&ensp;&ensp;&ensp;缓解该问题的一个方案就是，允许SVM在一些样本上出错，为此我们引入了**软间隔**的概念。即，在两条直线之间可以允许出现一些分类错误的样本。与之前的**硬间隔**相对。它表示，某些样本不满足约束条件：
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" title="y_{i}(w^{T}x_{i} + b) \geq 1" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" title="y_{i}(w^{T}x_{i} + b) \geq 1" /></a>
 
 
-这时候我们的优化目标可以写成
+&ensp;&ensp;&ensp;&ensp;这时候我们的优化目标可以写成
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}&space;||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_{0/1}&space;(y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;-&space;1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}&space;||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_{0/1}&space;(y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;-&space;1)" title="min_{w,b} \frac{1}{2} ||w||^{2} + C\sum_{i = 1}^{m}l_{0/1} (y_{i}(w^{T}x_{i} + b) - 1)" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}&space;||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_{0/1}&space;(y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;-&space;1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}&space;||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_{0/1}&space;(y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;-&space;1)" title="min_{w,b} \frac{1}{2} ||w||^{2} + C\sum_{i = 1}^{m}l_{0/1} (y_{i}(w^{T}x_{i} + b) - 1)" /></a>
+
+&ensp;&ensp;&ensp;&ensp;这里C是一个常数，而l是一个0-1损失函数。
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=l_{0/1}&space;=&space;\left\{\begin{matrix}&space;1,&space;if&space;z<0&space;\\&space;0,&space;otherwise&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{0/1}&space;=&space;\left\{\begin{matrix}&space;1,&space;if&space;z<0&space;\\&space;0,&space;otherwise&space;\end{matrix}\right." title="l_{0/1} = \left\{\begin{matrix} 1, if z<0 \\ 0, otherwise \end{matrix}\right." /></a>
+
+&ensp;&ensp;&ensp;&ensp;我们可以发现，根据C的取值不同，可以限制不满足条件样本的数目。这里，当C为有限值的时候，可以允许一些不满足的条件的样本。
+&ensp;&ensp;&ensp;&ensp;我们发现，0-1误差函数非凸、非连续，数学性质不太好，代入优化函数中不好直接求解，所以我们想办法找出一些函数去替代l，这里我们称为替代损失（surrogate loss）。这些函数常常具有比较好的数学性质（连续，凸函数），并且都给出了0-1误差的上界。
+
+hinge loss
+exponential loss
+logistic loss
+
+&ensp;&ensp;&ensp;&ensp;我们在这里会采用hinge loss，则优化的公式变成：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}max(0,&space;1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}max(0,&space;1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="min_{w,b} \frac{1}{2}||w||^{2} + C\sum_{i = 1}^{m}max(0, 1 - y_{i}(w^{T}x_{i} + b))" /></a>
+
+如果引入
 
 
 
