@@ -45,15 +45,14 @@
 1.有约束的最优化问题  
 &ensp;&ensp;&ensp;&ensp;上文中我们提到[有约束的最优化问题](https://zhuanlan.zhihu.com/p/26514613)，见参考文献，我们这里属于在不等式约束下的最优化问题，它取得极值的必要条件应该是KKT条件。
 >这里注明一下必要条件：
-例如在有等式约束的最优化问题中，我们构造的拉格朗日量对约束量偏导为0是取得极值的必要条件指的是，取得函数极值我们一定有偏导数为0，但是偏导数为0不一定会取得极值，我们还需要根据偏导数对函数大小进行比较。而KKT条件则是不等式约束条件下的优化函数取得极值的必要条件。  
-之后如果有时间会写一篇[KKT条件的推导]!!!!!!!!!!!!!!  
+例如在有等式约束的最优化问题中，我们构造的拉格朗日量对约束量偏导为0是取得极值的必要条件指的是，取得函数极值我们一定有偏导数为0，但是偏导数为0不一定会取得极值，我们还需要根据偏导数对函数大小进行比较。而KKT条件则是不等式约束条件下的优化函数取得极值的必要条件。   
 
 2.拉格朗日乘子法  
 &ensp;&ensp;&ensp;&ensp;我们根据拉格朗日乘子法可以得到如下的拉氏量:  
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
 
-&ensp;&ensp;&ensp;&ensp;这里我们规定a均大于等于0，为什么呢？这里要参考一下有约束的最优化问题的不等式，要取得最优值必须满足kkt条件（KKT条件是取得最优值的必要条件）：  
+&ensp;&ensp;&ensp;&ensp;这里我们规定a均大于等于0，这里可以理解为一个人为的限定，这个限定可以完美的符合最后我们推导出的一系列关系。
 
 KKT条件为：
 
@@ -61,6 +60,7 @@ KKT条件为：
 
 - <a href="https://www.codecogs.com/eqnedit.php?latex=h_j(x)=0；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_j(x)=0；" title="h_j(x)=0；" /></a>
 - <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha*g_k(k)=0&space;；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha*g_k(k)=0&space;；" title="\alpha*g_k(k)=0 ；" /></a>
+
 
 （后文中会详细讲述）    
 
@@ -70,7 +70,7 @@ KKT条件为：
 >**对偶问题**：  
 Dual problem 跟primal problem 可以看成本来是两个问题，因为优化的顺序不同而会得出两个不一定相关的值（但是minmaxf(x,y) >= maxminf(x,y)还是成立的，直观理解的话高中经常用的二次函数就可以了）。两者的差值就是duality gap，描述了我用另一种方式刻画问题的时候所造成的误差，强对偶的情况下最优值没有差别。在最优点处将会满足KKT 条件，但是KKT条件本身并不需要问题满足强对偶。([转自知乎atom Native](https://www.zhihu.com/question/58584814/answer/159079694))  
 
-&ensp;&ensp;&ensp;&ensp;根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即min L(w,b,a)，但是用求导的方法求解它仍然不容易，所以我们来构造更加简单的对偶的形式来求解。该式可以等价于: 
+&ensp;&ensp;&ensp;&ensp;根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即min L(w,b,a)，但是用求导的方法求解它仍然不容易（因为这里参数数量多，并且出现了耦合，计算起来不方便），所以我们来构造更加简单的对偶的形式来求解（分离参数，并且用简单的办法求出一些参数）。该式可以等价于: 
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))" /></a>  
 
