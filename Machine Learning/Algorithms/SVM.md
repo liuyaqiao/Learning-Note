@@ -144,7 +144,7 @@ Proof:
 
 
 ## 松弛支持向量机
-&ensp;&ensp;&ensp;&ensp;之前我们讨论的情况都是假定在样本空间或特征空间是线性可分的，即存在一个超平面将不同类的样本完全划分开。但是在现实情况中，往往很难确定合适的核函数使得训练样本在特征空间线性可分；退一步说，即使找到这个线性可分的超平面，也很难确定这个貌似线性可分的结果是不是由过拟合所造成的。
+&ensp;&ensp;&ensp;&ensp;之前我们讨论的情况都是假定在样本空间或特征空间是线性可分的，即存在一个超平面将不同类的样本完全划分开。但是在现实情况中，往往很难确定合适的核函数使得训练样本在特征空间线性可分；退一步说，即使找到这个线性可分的超平面，也很难确定这个貌似线性可分的结果是不是由过拟合所造成的。  
 &ensp;&ensp;&ensp;&ensp;缓解该问题的一个方案就是，允许SVM在一些样本上出错，为此我们引入了**软间隔**的概念。即，在两条直线之间可以允许出现一些分类错误的样本。与之前的**硬间隔**相对。它表示，某些样本不满足约束条件：
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" title="y_{i}(w^{T}x_{i} + b) \geq 1" /></a>
@@ -158,7 +158,7 @@ Proof:
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=l_{0/1}&space;=&space;\left\{\begin{matrix}&space;1,&space;if&space;z<0&space;\\&space;0,&space;otherwise&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{0/1}&space;=&space;\left\{\begin{matrix}&space;1,&space;if&space;z<0&space;\\&space;0,&space;otherwise&space;\end{matrix}\right." title="l_{0/1} = \left\{\begin{matrix} 1, if z<0 \\ 0, otherwise \end{matrix}\right." /></a>
 
-&ensp;&ensp;&ensp;&ensp;我们可以发现，根据C的取值不同，可以限制不满足条件样本的数目。这里，当C为有限值的时候，可以允许一些不满足的条件的样本。
+&ensp;&ensp;&ensp;&ensp;我们可以发现，根据C的取值不同，可以限制不满足条件样本的数目。这里，当C为有限值的时候，可以允许一些不满足的条件的样本。  
 &ensp;&ensp;&ensp;&ensp;我们发现，0-1误差函数非凸、非连续，数学性质不太好，代入优化函数中不好直接求解，所以我们想办法找出一些函数去替代l，这里我们称为替代损失（surrogate loss）。这些函数常常具有比较好的数学性质（连续，凸函数），并且都给出了0-1误差的上界。
 
 - hinge loss 
@@ -173,7 +173,7 @@ Proof:
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=l_{log}(z)&space;=&space;log(1&space;&plus;&space;exp(-z))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{log}(z)&space;=&space;log(1&space;&plus;&space;exp(-z))" title="l_{log}(z) = log(1 + exp(-z))" /></a>
 
-这里简要分析一下hinge的思路，如果出现了偏移量比较大的样本的时候，会对之前的0-1误差的损失函数带来比较大的影响。而hinge loss会尽量的减少这种情况带来的影响，它只是求了max(0, 1 - z)。针对远偏离的数据点，这里也只会取到max = 1，消除了这种outliner点对优化的影响。也可以证明，经过了hinge loss处理之后，优化的结果仍然只和支持向量有关，仍然保持了稀疏性。
+&ensp;&ensp;&ensp;&ensp;这里简要分析一下hinge的思路，如果出现了偏移量比较大的样本的时候，会对之前的0-1误差的损失函数带来比较大的影响，而且对一般偏移的样本处理不够精确。而hinge loss会尽量的减少这种情况带来的影响，它只是求了max(0, 1 - z)。针对远偏离的数据点，这里也只会取到max = 1，而margin里面的样本则可以根据位置计算出误差的大小，消除了这种outliner点对优化的影响并且把误差精细化。也可以证明，经过了hinge loss处理之后，优化的结果仍然只和支持向量有关，仍然保持了稀疏性。
 
 &ensp;&ensp;&ensp;&ensp;我们在这里会采用hinge loss，则优化的公式变成：
 
@@ -194,11 +194,11 @@ Proof:
 
 - svm与lr
 
-&ensp;&ensp;&ensp;&ensp;如果用对数几率损失函数去代替hinge损失函数则可以得到类似LR的误差函数形式。这实际上可以说明，SVM和LR的优化目标想尽，通常情况下，他们的性能也相当。
+&ensp;&ensp;&ensp;&ensp;如果用对数几率损失函数去代替hinge损失函数则可以得到类似LR的误差函数形式。这实际上可以说明，SVM和LR的优化目标相近，通常情况下，他们的性能也相当。
 
 &ensp;&ensp;&ensp;&ensp;这两个损失函数的本质目的是一样的，都是为了增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的hinge的处理方法是，只考虑SV，去学习分类器。而LR是通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。SVM考虑了局部，而LR则考虑了全局。
 
-LR的优势在于输出具有自然概率的形式，具有一定的实际意义。而SVM的输出不具有任何的实际意义。LR可以直接应用于多分类任务，而SVM则需要先进行处理。由于hinge有一个平台，所以SVM具有的解具有一定的稀疏性，而LR的logloss是光滑的单调函数，没有支持向量的概念，依赖更多的训练样本，预测开销比较大。
+&ensp;&ensp;&ensp;&ensp;LR的优势在于输出具有自然概率的形式，具有一定的实际意义。而SVM的输出不具有任何的实际意义。LR可以直接应用于多分类任务，而SVM则需要先进行处理。由于hinge有一个平台，所以SVM具有的解具有一定的稀疏性，而LR的logloss是光滑的单调函数，没有支持向量的概念，依赖更多的训练样本，预测开销比较大。
 
 &ensp;&ensp;&ensp;&ensp;[参考文献](https://blog.csdn.net/jfhdd/article/details/52319422)
 
