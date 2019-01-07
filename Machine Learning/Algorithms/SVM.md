@@ -97,20 +97,7 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;到这里，内侧针对w,b的最小值已经求解完毕，现在要求解的是外侧的最大值，所以原来的优化问题可以转化为：  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;L(w,b,\alpha)&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i,j&space;=&space;1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j}&space;\\&space;s.t.&space;\quad&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}y_{i}&space;=&space;1&space;\\&space;\alpha_{i}&space;\geq&space;0,&space;i&space;=&space;1,2,3...&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;L(w,b,\alpha)&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i,j&space;=&space;1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j}&space;\\&space;s.t.&space;\quad&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}y_{i}&space;=&space;1&space;\\&space;\alpha_{i}&space;\geq&space;0,&space;i&space;=&space;1,2,3...&space;\end{matrix}" title="\begin{matrix} L(w,b,\alpha) = \sum_{i = 1}^{n}\alpha_{i} - \frac{1}{2}\sum_{i,j = 1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j} \\ s.t. \quad \sum_{i = 1}^{m} \alpha_{i}y_{i} = 1 \\ \alpha_{i} \geq 0, i = 1,2,3... \end{matrix}" /></a>
 
-
-
-
-
-
-使用[拉格朗日乘子法](https://www.cnblogs.com/sddai/p/5728195.html)对x求偏导来得到对偶问题，可以得到：  
-这里规定引入的参数均满足大于等于0:
-<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>
-
-我们去试图找出这个问题的
-
-[约束问题](https://zhuanlan.zhihu.com/p/26514613) 
-
-
+这就得出了原最优化问题的**对偶问题**，而且这里只有a一个变量，我们可以通过适当的最优化方法求出a之后（二次规划）。根据KKT条件，可以求出w和b，即可得到模型。
 
 
 
