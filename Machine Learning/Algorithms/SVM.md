@@ -214,7 +214,9 @@ svm与正则化
 
 &ensp;&ensp;&ensp;&ensp;我们通过这个函数来计算高维空间里面的内积，从而避开多维映射的计算。于是我们的对偶问题可以写成：
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=max_{a}&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i&space;=&space;1}^{m}\sum_{j&space;=&space;1}^{m}&space;\alpha_{i}\alpha_{j}y_{i}y_{j}\kappa(x_i,x_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?max_{a}&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i&space;=&space;1}^{m}\sum_{j&space;=&space;1}^{m}&space;\alpha_{i}\alpha_{j}y_{i}y_{j}\kappa(x_i,x_j)" title="max_{a} \sum_{i = 1}^{m} \alpha_{i} - \frac{1}{2}\sum_{i = 1}^{m}\sum_{j = 1}^{m} \alpha_{i}\alpha_{j}y_{i}y_{j}\kappa(x_i,x_j)" /></a>
 
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=s.t.&space;\sum_{i&space;=&space;1}^{m}\alpha_{i}y_{i}&space;=&space;0,&space;\\&space;\alpha_{i}&space;\ge&space;0,&space;i&space;=&space;1,2,...m" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s.t.&space;\sum_{i&space;=&space;1}^{m}\alpha_{i}y_{i}&space;=&space;0,&space;\\&space;\alpha_{i}&space;\ge&space;0,&space;i&space;=&space;1,2,...m" title="s.t. \sum_{i = 1}^{m}\alpha_{i}y_{i} = 0, \\ \alpha_{i} \ge 0, i = 1,2,...m" /></a>
 
 
 ## 支持向量回归
