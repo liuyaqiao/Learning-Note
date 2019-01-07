@@ -193,19 +193,24 @@ Proof:
 
 
 - svm与lr
+
 &ensp;&ensp;&ensp;&ensp;如果用对数几率损失函数去代替hinge损失函数则可以得到类似LR的误差函数形式。这实际上可以说明，SVM和LR的优化目标想尽，通常情况下，他们的性能也相当。
 
-这两个损失函数的本质目的是一样的，都是为了增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的hinge的处理方法是，只考虑SV，去学习分类器。而LR是通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。SVM考虑了局部，而LR则考虑了全局。
+&ensp;&ensp;&ensp;&ensp;这两个损失函数的本质目的是一样的，都是为了增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的hinge的处理方法是，只考虑SV，去学习分类器。而LR是通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。SVM考虑了局部，而LR则考虑了全局。
 
-[参考文献](https://blog.csdn.net/jfhdd/article/details/52319422)
+LR的优势在于输出具有自然概率的形式，具有一定的实际意义。而SVM的输出不具有任何的实际意义。LR可以直接应用于多分类任务，而SVM则需要先进行处理。由于hinge有一个平台，所以SVM具有的解具有一定的稀疏性，而LR的logloss是光滑的单调函数，没有支持向量的概念，依赖更多的训练样本，预测开销比较大。
 
+&ensp;&ensp;&ensp;&ensp;[参考文献](https://blog.csdn.net/jfhdd/article/details/52319422)
 
-- 误差分类
+- 误差分类与正则化
 
-- svm与正则化
+&ensp;&ensp;&ensp;&ensp;我们可以通过0-1损失换成其他的替代函数以得到其他的学习模型。我们可以发现，这些模型的性质与所用的替代函数直接相关，他们具有一个共性特征：优化目标中的第一项用来描述划分超平面“间隔”的大小，另一项用来表述训练集上的误差，可以写成更一般的形式：
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=min_f\Omega&space;(f)&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l(f(x_i),&space;y_i)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_f\Omega&space;(f)&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l(f(x_i),&space;y_i)" title="min_f\Omega (f) + C\sum_{i = 1}^{m}l(f(x_i), y_i)" /></a>
 
+&ensp;&ensp;&ensp;&ensp;其中第一项被称为结构风险，用于描述模型f的某些性质；第二项称为经验风险，用于描述模型与训练数据的契合度；C用于二者折中。从经验化风险最小化的角度来看，前一项表述了我们希望获得具有何种性质的模型，另一方面，该信息有助于削减假设空间，从而降低了最小化训练误差的过拟合风险。从这个角度来说，C则称为正则化常数。
 
+&ensp;&ensp;&ensp;&ensp;从贝叶斯估计的角度来看，正则化项可以看作提供了模型的先验概率。
 
 ## 核函数
 &ensp;&ensp;&ensp;&ensp;之前我们都假设所有样本是线性可分的，然而在现实问题中，我们不能确定样本可以在空间中线性可分。对于这样的问题，我们可以把样本从原始空间映射到一个更高维的特征空间，使得样本在这个特征空间内线性可分，我们的相应的模型可以写成：
@@ -242,8 +247,18 @@ Proof:
 
 
 ## 支持向量回归
+&ensp;&ensp;&ensp;&ensp;SVR不同于一般的回归问题，它可以容忍f(x)与y之间最多由e的偏差。这相当于，以f(x)为中心，构建了一个宽度为2e的间隔带，若训练样本落入此间隔带，则预测正确。
 
-## 
+&ensp;&ensp;&ensp;&ensp;则问题可以简化为：
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}\frac{1}{2}||w||^2&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_e(f(x_i)&space;-&space;y_i])" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}\frac{1}{2}||w||^2&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_e(f(x_i)&space;-&space;y_i])" title="min_{w,b}\frac{1}{2}||w||^2 + C\sum_{i = 1}^{m}l_e(f(x_i) - y_i])" /></a>
+
+&ensp;&ensp;&ensp;&ensp;其中C为正则化常数，le是不敏感损失函数，其形式为：
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=l_e&space;=&space;\left\{\begin{matrix}&space;0,\quad&space;if&space;|z|&space;\leq&space;e&space;\\&space;|z|&space;-&space;e,&space;\quad&space;otherwise&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_e&space;=&space;\left\{\begin{matrix}&space;0,\quad&space;if&space;|z|&space;\leq&space;e&space;\\&space;|z|&space;-&space;e,&space;\quad&space;otherwise&space;\end{matrix}\right." title="l_e = \left\{\begin{matrix} 0,\quad if |z| \leq e \\ |z| - e, \quad otherwise \end{matrix}\right." /></a>
+
+&ensp;&ensp;&ensp;&ensp;同样利用对偶解法和核方法可以得到完全类似的结果。
+
 
 
 
