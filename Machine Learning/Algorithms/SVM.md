@@ -161,15 +161,26 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;我们可以发现，根据C的取值不同，可以限制不满足条件样本的数目。这里，当C为有限值的时候，可以允许一些不满足的条件的样本。
 &ensp;&ensp;&ensp;&ensp;我们发现，0-1误差函数非凸、非连续，数学性质不太好，代入优化函数中不好直接求解，所以我们想办法找出一些函数去替代l，这里我们称为替代损失（surrogate loss）。这些函数常常具有比较好的数学性质（连续，凸函数），并且都给出了0-1误差的上界。
 
-hinge loss
-exponential loss
-logistic loss
+- hinge loss
+- exponential loss
+- logistic loss
 
 &ensp;&ensp;&ensp;&ensp;我们在这里会采用hinge loss，则优化的公式变成：
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}max(0,&space;1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}max(0,&space;1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="min_{w,b} \frac{1}{2}||w||^{2} + C\sum_{i = 1}^{m}max(0, 1 - y_{i}(w^{T}x_{i} + b))" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}max(0,&space;1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}max(0,&space;1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="min_{w,b} \frac{1}{2}||w||^{2} + C\sum_{i = 1}^{m}max(0, 1 - y_{i}(w^{T}x_{i} + b))" /></a>
 
-如果引入
+&ensp;&ensp;&ensp;&ensp;如果引入松弛变量，可以讲上式重写为：
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b,\xi_{i}}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}\xi&space;_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b,\xi_{i}}&space;\frac{1}{2}||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}\xi&space;_{i}" title="min_{w,b,\xi_{i}} \frac{1}{2}||w||^{2} + C\sum_{i = 1}^{m}\xi _{i}" /></a>
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1&space;-&space;\xi_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1&space;-&space;\xi_{i}" title="s.t. \quad y_{i}(w^{T}x_{i} + b) \geq 1 - \xi_{i}" /></a>
+
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\xi_{i}&space;\geq&space;0," target="_blank"><img src="https://latex.codecogs.com/gif.latex?\xi_{i}&space;\geq&space;0," title="\xi_{i} \geq 0," /></a>
+
+这就是软间隔支持向量机的基本形式。
+
+
+
 
 
 
