@@ -34,13 +34,14 @@
 
 &ensp;&ensp;&ensp;&ensp;总结来说，我们是通过构造一个满足强对偶关系的拉格朗日对偶问题来求解SVM。下面分别介绍一下：**有约束的最优化问题、拉格朗日乘子法、拉格朗日对偶问题、强对偶问题和KKT**条件五个方面来介绍：  
   
-1.  上文中我们提到[有约束的最优化问题](https://zhuanlan.zhihu.com/p/26514613)，见参考文献，我们这里属于在不等式约束下的最优化问题，它取得极值的必要条件应该是KKT条件。
+1.有约束的最优化问题
+&ensp;&ensp;&ensp;&ensp;上文中我们提到[有约束的最优化问题](https://zhuanlan.zhihu.com/p/26514613)，见参考文献，我们这里属于在不等式约束下的最优化问题，它取得极值的必要条件应该是KKT条件。
 >这里注明一下必要条件：
 例如在有等式约束的最优化问题中，我们构造的拉格朗日量对约束量偏导为0是取得极值的必要条件指的是，取得函数极值我们一定有偏导数为0，但是偏导数为0不一定会取得极值，我们还需要根据偏导数对函数大小进行比较。而KKT条件则是不等式约束条件下的优化函数取得极值的必要条件。  
 之后如果有时间会写一篇[KKT条件的推导]!!!!!!!!!!!!!!  
-2.  拉格朗日乘子法  
-我们根据拉格朗日乘子法可以得到如下的拉氏量:  
-<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
+2.拉格朗日乘子法  
+&ensp;&ensp;&ensp;&ensp;我们根据拉格朗日乘子法可以得到如下的拉氏量:  
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
 这里我们规定a均大于等于0，为什么呢？这里要参考一下有约束的最优化问题的不等式，要取得最优值必须满足kkt条件（KKT条件是取得最优值的必要条件）：  
 KKT条件为：  
     1. 经过经过拉格朗日函数处理之后的新目标函数L(w,b,α)对x求导为零：  
@@ -49,7 +50,7 @@ KKT条件为：
     
 对于我们的优化问题，条件二是满足的（相当于没有这一项）。也可以证明另外两个条件也满足，通过强对偶关系满足的KKT条件来证明。[参考](https://link.zhihu.com/?target=http%3A//blog.csdn.net/xianlingmao/article/details/7919597)
 
-3.  对偶问题  
+3.对偶问题  
 >**对偶问题**：  
 Dual problem 跟primal problem 可以看成本来是两个问题，因为优化的顺序不同而会得出两个不一定相关的值（但是minmaxf(x,y) >= maxminf(x,y)还是成立的，直观理解的话高中经常用的二次函数就可以了）。两者的差值就是duality gap，描述了我用另一种方式刻画问题的时候所造成的误差，强对偶的情况下最优值没有差别。在最优点处将会满足KKT 条件，但是KKT条件本身并不需要问题满足强对偶。([转自知乎atom Native](https://www.zhihu.com/question/58584814/answer/159079694))  
 
@@ -67,7 +68,7 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
 我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
 
-4.  强对偶问题的证明：
+4.强对偶问题的证明：
 >强对偶问题：  
 对于一个二次规划问题，强对偶关系存在有三个条件：  
     1.  凸函数（convex primal）  
@@ -77,7 +78,7 @@ Proof:
 这里也叫做slater条件，我们构造出的拉格朗日对偶问题满足了slater条件，即它是一个强对偶问题。（具体的数学表达自行wiki）  
 可以证明这里的拉格朗日函数满足强对偶的条件，所以这里可以来解它的对偶问题。（满足强对偶问题的函数在取到最优值的时候均满足KKT条件，即KKT条件是强对偶问题的必要条件，这里林轩田老师的机器学习技法课程中给了更为详细的推导 ，本文就不详细展开，我们直接使用这个结论）即：  
 
-5.  KKT条件：  
+5.KKT条件：  
 首先用一幅图来说明规范性条件、KKT条件和强对偶之间的关系：  
 &ensp;&ensp;&ensp;&ensp;![KKT](https://github.com/liuyaqiao/Learning-Note/blob/master/RC_KKT_DUAL.png)  
 &ensp;&ensp;&ensp;&ensp;(转自知乎用户徐林杰[link](https://zhuanlan.zhihu.com/p/36621652))  
