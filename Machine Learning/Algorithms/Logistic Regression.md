@@ -34,7 +34,17 @@ LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分
 <a href="https://www.codecogs.com/eqnedit.php?latex=Pr(Y&space;=&space;1|x)&space;=&space;\frac{e^{wx}}{e^{wx}&space;&plus;&space;1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr(Y&space;=&space;1|x)&space;=&space;\frac{e^{wx}}{e^{wx}&space;&plus;&space;1}" title="Pr(Y = 1|x) = \frac{e^{wx}}{e^{wx} + 1}" /></a>  
 <a href="https://www.codecogs.com/eqnedit.php?latex=Pr(Y&space;=&space;0|x)&space;=&space;\frac{1}{e^{wx}&space;&plus;&space;1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr(Y&space;=&space;0|x)&space;=&space;\frac{1}{e^{wx}&space;&plus;&space;1}" title="Pr(Y = 0|x) = \frac{1}{e^{wx} + 1}" /></a>    
 
-## 代价函数  
+## 代价函数（LogLoss）  
+
+实际是，代价函数和最大似然估计本质上是等价的。
+
+- 损失函数是一种用来衡量预测错误程度的函数，机器学习的基本策略就是使得经验风险最小化，也就是模型在训练上的损失最小，这是一种普适的思路。
+
+- 而对于涉及到概率的问题，极大似然估计也是使得估计错误最小的一种思路，从数学推导上来看，LR的经验风险就是极大似然估计取个对数加个负号而已。
+
+这是两种思维方式，但本质上是一样的，损失函数这一套逻辑是机器学习的普适逻辑，而极大似然估计这套思想是来解决概率相关问题。
+
+
 <a href="https://www.codecogs.com/eqnedit.php?latex=J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?J(\theta&space;)&space;=&space;-\frac{l(\theta&space;)}{m}" title="J(\theta ) = -\frac{l(\theta )}{m}" /></a>  是似然函数对样本数商值得相反数  
 我们为了得到最优得参数，需要最优化上述得代价函数。（这里以随机梯度下降法为例）  
 <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\cdot&space;\frac{\delta&space;}{\delta&space;_{\theta_{j}}}J(\theta&space;)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{j}&space;=&space;\theta_{j}&space;-&space;\alpha&space;\cdot&space;\frac{\delta&space;}{\delta&space;_{\theta_{j}}}J(\theta&space;)" title="\theta_{j} = \theta_{j} - \alpha \cdot \frac{\delta }{\delta _{\theta_{j}}}J(\theta )" /></a>  
