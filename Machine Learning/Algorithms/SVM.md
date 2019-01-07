@@ -144,6 +144,18 @@ Proof:
 
 
 ## 松弛支持向量机
+&ensp;&ensp;&ensp;&ensp;之前我们讨论的情况都是假定在样本空间或特征空间是线性可分的，即存在一个超平面将不同类的样本完全划分开。但是在现实情况中，往往很难确定合适的核函数使得训练样本在特征空间线性可分；退一步说，即使找到这个线性可分的超平面，也很难确定这个貌似线性可分的结果是不是由过拟合所造成的。
+&ensp;&ensp;&ensp;&ensp;缓解该问题的一个方案就是，允许SVM在一些样本上出错，为此我们引入了**软间隔**的概念。即，在两条直线之间可以允许出现一些分类错误的样本。与之前的**硬间隔**相对。它表示，某些样本不满足约束条件：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1" title="y_{i}(w^{T}x_{i} + b) \geq 1" /></a>
+
+
+这时候我们的优化目标可以写成
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}&space;||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_{0/1}&space;(y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;-&space;1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}&space;||w||^{2}&space;&plus;&space;C\sum_{i&space;=&space;1}^{m}l_{0/1}&space;(y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;-&space;1)" title="min_{w,b} \frac{1}{2} ||w||^{2} + C\sum_{i = 1}^{m}l_{0/1} (y_{i}(w^{T}x_{i} + b) - 1)" /></a>
+
+
+
 
 ## 核函数
 
