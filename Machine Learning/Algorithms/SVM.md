@@ -34,39 +34,40 @@
 
 &ensp;&ensp;&ensp;&ensp;总结来说，我们是通过构造一个满足强对偶关系的拉格朗日对偶问题来求解SVM。下面分别介绍一下：**有约束的最优化问题、拉格朗日乘子法、拉格朗日对偶问题、强对偶问题和KKT**条件五个方面来介绍：  
   
-1.有约束的最优化问题
+1.有约束的最优化问题  
 &ensp;&ensp;&ensp;&ensp;上文中我们提到[有约束的最优化问题](https://zhuanlan.zhihu.com/p/26514613)，见参考文献，我们这里属于在不等式约束下的最优化问题，它取得极值的必要条件应该是KKT条件。
 >这里注明一下必要条件：
 例如在有等式约束的最优化问题中，我们构造的拉格朗日量对约束量偏导为0是取得极值的必要条件指的是，取得函数极值我们一定有偏导数为0，但是偏导数为0不一定会取得极值，我们还需要根据偏导数对函数大小进行比较。而KKT条件则是不等式约束条件下的优化函数取得极值的必要条件。  
 之后如果有时间会写一篇[KKT条件的推导]!!!!!!!!!!!!!!  
+
 2.拉格朗日乘子法  
 &ensp;&ensp;&ensp;&ensp;我们根据拉格朗日乘子法可以得到如下的拉氏量:  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
-这里我们规定a均大于等于0，为什么呢？这里要参考一下有约束的最优化问题的不等式，要取得最优值必须满足kkt条件（KKT条件是取得最优值的必要条件）：  
-KKT条件为：  
-    1. 经过经过拉格朗日函数处理之后的新目标函数L(w,b,α)对x求导为零：  
-    2.  <a href="https://www.codecogs.com/eqnedit.php?latex=h_j(x)=0；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_j(x)=0；" title="h_j(x)=0；" /></a>
-    3.  <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha*g_k(k)=0&space;；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha*g_k(k)=0&space;；" title="\alpha*g_k(k)=0 ；" /></a>
+&ensp;&ensp;&ensp;&ensp;这里我们规定a均大于等于0，为什么呢？这里要参考一下有约束的最优化问题的不等式，要取得最优值必须满足kkt条件（KKT条件是取得最优值的必要条件）：  
+&ensp;&ensp;&ensp;&ensp;KKT条件为：  
+    1.经过经过拉格朗日函数处理之后的新目标函数L(w,b,α)对x求导为零：  
+    2.<a href="https://www.codecogs.com/eqnedit.php?latex=h_j(x)=0；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_j(x)=0；" title="h_j(x)=0；" /></a>  
+    3.<a href="https://www.codecogs.com/eqnedit.php?latex=\alpha*g_k(k)=0&space;；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha*g_k(k)=0&space;；" title="\alpha*g_k(k)=0 ；" /></a>  
     
-对于我们的优化问题，条件二是满足的（相当于没有这一项）。也可以证明另外两个条件也满足，通过强对偶关系满足的KKT条件来证明。[参考](https://link.zhihu.com/?target=http%3A//blog.csdn.net/xianlingmao/article/details/7919597)
+&ensp;&ensp;&ensp;&ensp;对于我们的优化问题，条件二是满足的（相当于没有这一项）。也可以证明另外两个条件也满足，通过强对偶关系满足的KKT条件来证明。[参考](https://link.zhihu.com/?target=http%3A//blog.csdn.net/xianlingmao/article/details/7919597)
 
 3.对偶问题  
 >**对偶问题**：  
 Dual problem 跟primal problem 可以看成本来是两个问题，因为优化的顺序不同而会得出两个不一定相关的值（但是minmaxf(x,y) >= maxminf(x,y)还是成立的，直观理解的话高中经常用的二次函数就可以了）。两者的差值就是duality gap，描述了我用另一种方式刻画问题的时候所造成的误差，强对偶的情况下最优值没有差别。在最优点处将会满足KKT 条件，但是KKT条件本身并不需要问题满足强对偶。([转自知乎atom Native](https://www.zhihu.com/question/58584814/answer/159079694))  
 
-根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即min L(w,b,a)，但是用求导的方法求解它仍然不容易，所以我们来构造更加简单的对偶的形式来求解。该式可以等价于:  
+&ensp;&ensp;&ensp;&ensp;根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即min L(w,b,a)，但是用求导的方法求解它仍然不容易，所以我们来构造更加简单的对偶的形式来求解。该式可以等价于:  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))" /></a>  
 Proof:  
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min_{b,w}max_{a_{n}\geq 0}(\frac{1}{2}||w||^{2} + a_{n} (1 - y_{n}(w^{T} x_{i} + b_{i}))) \\ = min_{b, w}(\infty \text{ if violate}; \frac{1}{2} ||w||^{2} \text{ if feasible})" /></a>  
-如果有任何违反规则，第二项大于0，则最大值会趋近于正无穷。  
-如果所有的点都符合的话，第二项小于0，最大值则为0. 
-此时我们已经把限制条件加入到了max中，可以保证在符合约束条件的情况下，该构造的函数和原函数的优化结果相同。即可得到，    
+&ensp;&ensp;&ensp;&ensp;如果有任何违反规则，第二项大于0，则最大值会趋近于正无穷。  
+&ensp;&ensp;&ensp;&ensp;如果所有的点都符合的话，第二项小于0，最大值则为0.   
+&ensp;&ensp;&ensp;&ensp;此时我们已经把限制条件加入到了max中，可以保证在符合约束条件的情况下，该构造的函数和原函数的优化结果相同。即可得到，    
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min(\frac{1}{2}||w||^{2}), \text{meet constrains}" /></a>  
-我们交换max和min的顺序，得到这个问题的对偶问题为：  
-&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" title="\begin{matrix} max_{a}min_{b,w}\text{ }L(b,w,a)\\ s.t.\quad a_{i} \geq 0 \end{matrix}" /></a>  
-根据对偶函数的性质（见周志华西瓜书附录405页），对偶函数给出了主问题最优值的下界，即有：  
-&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
-我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
+&ensp;&ensp;&ensp;&ensp;我们交换max和min的顺序，得到这个问题的对偶问题为：  
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" title="\begin{matrix} max_{a}min_{b,w}\text{ }L(b,w,a)\\ s.t.\quad a_{i} \geq 0 \end{matrix}" /></a>  
+&ensp;&ensp;&ensp;&ensp;根据对偶函数的性质（见周志华西瓜书附录405页），对偶函数给出了主问题最优值的下界，即有：  
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
+&ensp;&ensp;&ensp;&ensp;我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
 
 4.强对偶问题的证明：
 >强对偶问题：  
