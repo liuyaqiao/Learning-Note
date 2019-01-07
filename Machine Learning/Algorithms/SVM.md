@@ -35,7 +35,7 @@
 &ensp;&ensp;&ensp;&ensp;这里我们构成了一个凸优化的问题，因为所优化项本身是一个**凸二次规划问题**，可以有现成的包求解，但是我们具有更好的解决办法。（见下文）
 
 ## 数学处理（拉格朗日乘子、对偶问题和KKT条件）
-&ensp;&ensp;&ensp;&ensp;首先说一下整体的推导思路：  
+&ensp;&ensp;&ensp;&ensp;首先说一下整体的一种推导思路：  
 &ensp;&ensp;&ensp;&ensp;首先我们得到一个**有约束的最优化问题**，这时我们考虑已经的梯度下降（gradient descent）等方法去处理，但是由于条件的限制导致这个问题不是很好处理。所以我们要考虑讲问题转化成**没有约束条件的最优化问题**，这时我们采用了**拉格朗日乘子法**。  
 &ensp;&ensp;&ensp;&ensp;我们本来可以通过求导的方法取求解这个问题，但是这时计算的过程过于复杂，所以我们考虑通过构造**拉格朗日对偶问题**来解决这个复杂计算的问题。为了保证原问题和对偶问题所求的结果一致，我们需要证明这个问题满足**强对偶关系**。经过证明之后，我们可以把对偶问题的解当成是原问题的解。  
 &ensp;&ensp;&ensp;&ensp;而**KKT条件**，则是**不等式约束下的最优化问题有解**、**构造对偶问题**和证明**强对偶关系**都需要用到的条件，可以说是整个理论的一个纽带。  
@@ -90,7 +90,7 @@ Proof:
 
 &ensp;&ensp;&ensp;&ensp;根据对偶函数的性质（见周志华西瓜书附录405页），对偶函数给出了主问题最优值的下界，即有：  
 
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
 
 &ensp;&ensp;&ensp;&ensp;我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
 
@@ -137,6 +137,10 @@ Proof:
 
 &ensp;&ensp;&ensp;&ensp;这里现在多采用比较流行的SMO方法取解决这个二次规划问题。
 
+上面介绍了第一种思路，我们由slater条件出发，得到了一系列结果。还有一种被大家所接受的思路是：我们先提出规范性约束条件，再做一些更紧致的要求，使它进化为KKT条件。之后我们分析这个被优化函数的凹凸性和是否可微，可以判断出满足强对偶关系。针对这种思路我们这边不详细展开，大家可以去查阅相关资料和书籍。市面上大多教科书都是以这种思路来进行推导。
+
+我们可以用一幅图来表达这些理论之间的关系：
+![RL](https://github.com/liuyaqiao/Learning-Note/blob/master/Relationship.png)  
 
 
 ## 松弛支持向量机
