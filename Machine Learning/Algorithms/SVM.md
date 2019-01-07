@@ -5,9 +5,13 @@
 &ensp;&ensp;&ensp;&ensp;我们在空间中可以找到无数条线做分类，都可以达到分类的效果。但是分类器有好坏之分，我们的出发点是选择一个能起到最好的分类效果的分类器。从直观上看，我们应该寻找**在所有样本最中间的一条直线**做为最终的分类器，这样的分类器对噪音容忍度比较高，对未知数据的泛化能力比较强。  
 ## 基本型的推导
 &ensp;&ensp;&ensp;&ensp;在样本空间，划分超平面可以通过如下的线性方程来描述：  
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=w^{T}x&space;&plus;&space;b&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w^{T}x&space;&plus;&space;b&space;=&space;0" title="w^{T}x + b = 0" /></a>,  
+
 &ensp;&ensp;&ensp;&ensp;其中，w表示法向量决定了平面的方向，b是位移量也叫偏执量，决定了超平面和原点之间的距离。空间中任意一点到这个超平面的距离可以表示为：  
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r&space;=&space;\frac{\left&space;|&space;w^{T}&space;x&space;&plus;&space;b&space;\right&space;|}{\left&space;\|&space;w&space;\right&space;\|}" title="r = \frac{\left | w^{T} x + b \right |}{\left \| w \right \|}" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;我们通过这个距离公式和约束条件就可以推导出SVM的基本型：  
 >以下是推导过程：  
 ![SVM](https://github.com/liuyaqiao/Learning-Note/blob/master/svm.png)  
@@ -17,11 +21,15 @@
 &ensp;&ensp;&ensp;&ensp;对于y = -1，则有wx + b <= -1。则可以得到：  
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;w^{T}x&space;&plus;&space;b&space;\geq&space;&plus;1,&space;y_{i}&space;=&space;&plus;1\\&space;w^{T}x&space;&plus;&space;b&space;\leq&space;-1,&space;y_{i}&space;=&space;-1&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;w^{T}x&space;&plus;&space;b&space;\geq&space;&plus;1,&space;y_{i}&space;=&space;&plus;1\\&space;w^{T}x&space;&plus;&space;b&space;\leq&space;-1,&space;y_{i}&space;=&space;-1&space;\end{matrix}\right." title="\left\{\begin{matrix} w^{T}x + b \geq +1, y_{i} = +1\\ w^{T}x + b \leq -1, y_{i} = -1 \end{matrix}\right." /></a>   
-&ensp;&ensp;&ensp;&ensp;通过对直线距离公式，构造出的两条直线的间隔是2/||w||,所以可以构造出的最优化问题为：  
+
+&ensp;&ensp;&ensp;&ensp;通过对直线距离公式，构造出的两条直线的间隔是2/||w||,所以可以构造出的最优化问题为：
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;max&space;\quad\frac{2}{\left&space;\|&space;w&space;\right&space;\|}\\&space;s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;max&space;\quad\frac{2}{\left&space;\|&space;w&space;\right&space;\|}\\&space;s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}" title="\begin{matrix} max \quad\frac{2}{\left \| w \right \|}\\ s.t. \quad y_{i}(w^{T}x_{i} + b) \geq 1, \quad i = 1,2,3 \end{matrix}" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;同理，上述的最优化问题等价于：  
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;min\quad&space;\frac{1}{2}||w||^{2}\\s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;min\quad&space;\frac{1}{2}||w||^{2}\\s.t.&space;\quad&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b)&space;\geq&space;1,&space;\quad&space;i&space;=&space;1,2,3&space;\end{matrix}\right." title="\left\{\begin{matrix} min\quad \frac{1}{2}||w||^{2}\\s.t. \quad y_{i}(w^{T}x_{i} + b) \geq 1, \quad i = 1,2,3 \end{matrix}\right." /></a>  
+
 &ensp;&ensp;&ensp;&ensp;上式就是支持向量机的基本型。  
 &ensp;&ensp;&ensp;&ensp;用通俗的话来讲，这是一个有约束条件的最优化问题。约束条件是样本空间，最优化的目标是我们取的分类标准。用一句话概括：svm是在当前样本空间中，寻找一个使得异类样本之间具有最大距离的超平面（分类器）。  
 &ensp;&ensp;&ensp;&ensp;这里我们构成了一个凸优化的问题，因为所优化项本身是一个**凸二次规划问题**，可以有现成的包求解，但是我们具有更好的解决办法。（见下文）
@@ -42,12 +50,15 @@
 
 2.拉格朗日乘子法  
 &ensp;&ensp;&ensp;&ensp;我们根据拉格朗日乘子法可以得到如下的拉氏量:  
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;这里我们规定a均大于等于0，为什么呢？这里要参考一下有约束的最优化问题的不等式，要取得最优值必须满足kkt条件（KKT条件是取得最优值的必要条件）：  
 
 KKT条件为：
 
 - 经过经过拉格朗日函数处理之后的新目标函数L(w,b,α)对x求导为零：
+
 - <a href="https://www.codecogs.com/eqnedit.php?latex=h_j(x)=0；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_j(x)=0；" title="h_j(x)=0；" /></a>
 - <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha*g_k(k)=0&space;；" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha*g_k(k)=0&space;；" title="\alpha*g_k(k)=0 ；" /></a>
 
@@ -59,18 +70,28 @@ KKT条件为：
 >**对偶问题**：  
 Dual problem 跟primal problem 可以看成本来是两个问题，因为优化的顺序不同而会得出两个不一定相关的值（但是minmaxf(x,y) >= maxminf(x,y)还是成立的，直观理解的话高中经常用的二次函数就可以了）。两者的差值就是duality gap，描述了我用另一种方式刻画问题的时候所造成的误差，强对偶的情况下最优值没有差别。在最优点处将会满足KKT 条件，但是KKT条件本身并不需要问题满足强对偶。([转自知乎atom Native](https://www.zhihu.com/question/58584814/answer/159079694))  
 
-&ensp;&ensp;&ensp;&ensp;根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即min L(w,b,a)，但是用求导的方法求解它仍然不容易，所以我们来构造更加简单的对偶的形式来求解。该式可以等价于:  
+&ensp;&ensp;&ensp;&ensp;根据拉格朗日乘子的理论，我们把一个有约束的最优化问题转化成了一个无约束的最优化问题，相当于是对拉氏量进行优化，即min L(w,b,a)，但是用求导的方法求解它仍然不容易，所以我们来构造更加简单的对偶的形式来求解。该式可以等价于: 
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))" /></a>  
+
 Proof:  
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min_{b,w}max_{a_{n}\geq&space;0}(\frac{1}{2}||w||^{2}&space;&plus;&space;a_{n}&space;(1&space;-&space;y_{n}(w^{T}&space;x_{i}&space;&plus;&space;b_{i})))&space;\\&space;=&space;min_{b,&space;w}(\infty&space;\text{&space;if&space;violate};&space;\frac{1}{2}&space;||w||^{2}&space;\text{&space;if&space;feasible})" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min_{b,w}max_{a_{n}\geq 0}(\frac{1}{2}||w||^{2} + a_{n} (1 - y_{n}(w^{T} x_{i} + b_{i}))) \\ = min_{b, w}(\infty \text{ if violate}; \frac{1}{2} ||w||^{2} \text{ if feasible})" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;如果有任何违反规则，第二项大于0，则最大值会趋近于正无穷。  
 &ensp;&ensp;&ensp;&ensp;如果所有的点都符合的话，第二项小于0，最大值则为0.   
 &ensp;&ensp;&ensp;&ensp;此时我们已经把限制条件加入到了max中，可以保证在符合约束条件的情况下，该构造的函数和原函数的优化结果相同。即可得到，    
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{b,w}max_{a_{n}&space;\geqslant&space;0}(L(b,w,a))\\&space;=&space;min(\frac{1}{2}||w||^{2}),&space;\text{meet&space;constrains}" title="min_{b,w}max_{a_{n} \geqslant 0}(L(b,w,a))\\ = min(\frac{1}{2}||w||^{2}), \text{meet constrains}" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;我们交换max和min的顺序，得到这个问题的对偶问题为：  
+
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;max_{a}min_{b,w}\text{&space;}L(b,w,a)\\&space;s.t.\quad&space;a_{i}&space;\geq&space;0&space;\end{matrix}" title="\begin{matrix} max_{a}min_{b,w}\text{ }L(b,w,a)\\ s.t.\quad a_{i} \geq 0 \end{matrix}" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;根据对偶函数的性质（见周志华西瓜书附录405页），对偶函数给出了主问题最优值的下界，即有：  
+
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?maxminL(w,b,a)&space;\leq&space;minmaxL(w,b,a)" title="maxminL(w,b,a) \leq minmaxL(w,b,a)" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;我们只有证明这个函数满足**强对偶关系**之后，才可以将两个最优值之间画上等号。
 
 4.强对偶问题的证明：
@@ -88,22 +109,33 @@ Proof:
 &ensp;&ensp;&ensp;&ensp;(转自知乎用户徐林杰[link](https://zhuanlan.zhihu.com/p/36621652))  
 &ensp;&ensp;&ensp;&ensp;大体来说，KKT条件是一个不等式约束条件取得极值的必要条件，但是KKT条件并不一定所有情况都满足。要满足KKT条件需要有一个规范性条件（Regularity conditions），为的是要求约束条件的质量不能太差。强对偶性质非常好，但是要求也很苛刻，比 KKT 条件要苛刻。如果问题满足强对偶一定也满足 KKT 条件，反之不一定。  
 &ensp;&ensp;&ensp;&ensp;接着，我们来具体看一下KKT条件到底是什么：  
-&ensp;&ensp;&ensp;&ensp;对于具有等式和不等式约束的一般优化问题：  
+&ensp;&ensp;&ensp;&ensp;对于具有等式和不等式约束的一般优化问题： 
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;minf(x)\\&space;s.t.g_{j}(x)&space;\leq&space;0(j&space;=&space;1,2\cdot&space;\cdot&space;\\&space;h_{k}(x)&space;=&space;0(k&space;=&space;1,2,\cdot\cdot,l)&space;\end{matrix}" title="\begin{matrix} minf(x)\\ s.t.g_{j}(x) \leq 0(j = 1,2\cdot \cdot \\ h_{k}(x) = 0(k = 1,2,\cdot\cdot,l) \end{matrix}" /></a>  
 
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?\left\{\begin{matrix}&space;&&&space;\frac{\partial&space;f}{\partial&space;x_{i}}&space;&plus;&space;\sum_{j&space;=&space;1}^{m}\mu_{j}\frac{\partial&space;g_{i}}{\partial&space;x_{i}}&space;&plus;&space;\sum_{k&space;=&space;1}^{l}\lambda&space;_{k}\frac{\partial&space;h_{k}}{\partial&space;x_{i}}&space;=&space;0,&space;(i&space;=&space;1,2,...,n)&space;\\&space;&&&space;h_{k}(x)&space;=&space;0,&space;(k&space;=&space;1,2,...,l)&space;\\&space;&&&space;\mu&space;_{j}g_{j}&space;=&space;0,&space;(j&space;=&space;1,2,...,&space;m)&space;\\&space;&&&space;\mu_{j}&space;\geq&space;0&space;\end{matrix}\right." title="\left\{\begin{matrix} && \frac{\partial f}{\partial x_{i}} + \sum_{j = 1}^{m}\mu_{j}\frac{\partial g_{i}}{\partial x_{i}} + \sum_{k = 1}^{l}\lambda _{k}\frac{\partial h_{k}}{\partial x_{i}} = 0, (i = 1,2,...,n) \\ && h_{k}(x) = 0, (k = 1,2,...,l) \\ && \mu _{j}g_{j} = 0, (j = 1,2,..., m) \\ && \mu_{j} \geq 0 \end{matrix}\right." /></a>
 
 &ensp;&ensp;&ensp;&ensp;接着，我们根据KKT条件是取得最优值的必要条件取解决对偶问题。
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>  
-&ensp;&ensp;&ensp;&ensp;对这个L氏量进行KKT条件的代入，分别对w,b求偏导数为0，可得：  
+
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,a)&space;=&space;\frac{1}{2}&space;\left&space;\|&space;w&space;\right&space;\|^{2}&space;&plus;&space;\sum_{1}^{m}\alpha&space;_{i}(1&space;-&space;y_{i}(w^{T}x_{i}&space;&plus;&space;b))" title="L(w,b,a) = \frac{1}{2} \left \| w \right \|^{2} + \sum_{1}^{m}\alpha _{i}(1 - y_{i}(w^{T}x_{i} + b))" /></a>
+
+&ensp;&ensp;&ensp;&ensp;对这个L氏量进行KKT条件的代入，分别对w,b求偏导数为0，可得： 
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;L}{\partial&space;w}&space;=&space;0\rightarrow&space;w&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha&space;_{i}y_{i}x_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;L}{\partial&space;w}&space;=&space;0\rightarrow&space;w&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha&space;_{i}y_{i}x_{i}" title="\frac{\partial L}{\partial w} = 0\rightarrow w = \sum_{i = 1}^{n}\alpha _{i}y_{i}x_{i}" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{\partial&space;L}{\partial&space;b}&space;=&space;0\rightarrow&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}y_{i}&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{\partial&space;L}{\partial&space;b}&space;=&space;0\rightarrow&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}y_{i}&space;=&space;0" title="\frac{\partial L}{\partial b} = 0\rightarrow \sum_{i = 1}^{n}\alpha_{i}y_{i} = 0" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;再把这个结果带回到L中，可以得到：  
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=L(w,b,\alpha)&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i,j&space;=&space;1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(w,b,\alpha)&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i,j&space;=&space;1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j}" title="L(w,b,\alpha) = \sum_{i = 1}^{n}\alpha_{i} - \frac{1}{2}\sum_{i,j = 1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j}" /></a>  
+
 &ensp;&ensp;&ensp;&ensp;到这里，内侧针对w,b的最小值已经求解完毕，现在要求解的是外侧的最大值，所以原来的优化问题可以转化为：  
+
 &ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=\begin{matrix}&space;L(w,b,\alpha)&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i,j&space;=&space;1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j}&space;\\&space;s.t.&space;\quad&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}y_{i}&space;=&space;1&space;\\&space;\alpha_{i}&space;\geq&space;0,&space;i&space;=&space;1,2,3...&space;\end{matrix}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\begin{matrix}&space;L(w,b,\alpha)&space;=&space;\sum_{i&space;=&space;1}^{n}\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i,j&space;=&space;1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j}&space;\\&space;s.t.&space;\quad&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}y_{i}&space;=&space;1&space;\\&space;\alpha_{i}&space;\geq&space;0,&space;i&space;=&space;1,2,3...&space;\end{matrix}" title="\begin{matrix} L(w,b,\alpha) = \sum_{i = 1}^{n}\alpha_{i} - \frac{1}{2}\sum_{i,j = 1}^{n}\alpha_{i}\alpha_{j}y_{i}y_{j}x_{i}^{T}x_{j} \\ s.t. \quad \sum_{i = 1}^{m} \alpha_{i}y_{i} = 1 \\ \alpha_{i} \geq 0, i = 1,2,3... \end{matrix}" /></a>
 
-这就得出了原最优化问题的**对偶问题**，而且这里只有a一个变量，我们可以通过适当的最优化方法求出a之后（二次规划）。根据KKT条件，可以求出w和b，即可得到模型。
+&ensp;&ensp;&ensp;&ensp;这就得出了原最优化问题的**对偶问题**，而且这里只有a一个变量，我们可以通过适当的最优化方法求出a之后（二次规划）。根据KKT条件，可以求出w和b，即可得到模型。
+
+&ensp;&ensp;&ensp;&ensp;这里现在多采用比较流行的SMO方法取解决这个二次规划问题。
 
 
 
