@@ -194,21 +194,27 @@ svm与正则化
 ## 核函数
 &ensp;&ensp;&ensp;&ensp;之前我们都假设所有样本是线性可分的，然而在现实问题中，我们不能确定样本可以在空间中线性可分。对于这样的问题，我们可以把样本从原始空间映射到一个更高维的特征空间，使得样本在这个特征空间内线性可分，我们的相应的模型可以写成：
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;w^{T}\phi&space;(x)&space;&plus;&space;b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;w^{T}\phi&space;(x)&space;&plus;&space;b" title="f(x) = w^{T}\phi (x) + b" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;w^{T}\phi&space;(x)&space;&plus;&space;b" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;w^{T}\phi&space;(x)&space;&plus;&space;b" title="f(x) = w^{T}\phi (x) + b" /></a>
 
-类似的最优化问题可以写成：
+&ensp;&ensp;&ensp;&ensp;类似的最优化问题可以写成：
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}||w||^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}||w||^{2}" title="min_{w,b} \frac{1}{2}||w||^{2}" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=min_{w,b}&space;\frac{1}{2}||w||^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?min_{w,b}&space;\frac{1}{2}||w||^{2}" title="min_{w,b} \frac{1}{2}||w||^{2}" /></a>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=s.t.&space;\quad&space;y_{i}(w^{T}\phi(x_{i}&space;&plus;&space;b))\ge&space;1,&space;i&space;=&space;1,&space;2,&space;...m" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s.t.&space;\quad&space;y_{i}(w^{T}\phi(x_{i}&space;&plus;&space;b))\ge&space;1,&space;i&space;=&space;1,&space;2,&space;...m" title="s.t. \quad y_{i}(w^{T}\phi(x_{i} + b))\ge 1, i = 1, 2, ...m" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=s.t.&space;\quad&space;y_{i}(w^{T}\phi(x_{i}&space;&plus;&space;b))\ge&space;1,&space;i&space;=&space;1,&space;2,&space;...m" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s.t.&space;\quad&space;y_{i}(w^{T}\phi(x_{i}&space;&plus;&space;b))\ge&space;1,&space;i&space;=&space;1,&space;2,&space;...m" title="s.t. \quad y_{i}(w^{T}\phi(x_{i} + b))\ge 1, i = 1, 2, ...m" /></a>
 
-可以的得出起对偶问题是：
+&ensp;&ensp;&ensp;&ensp;可以的得出起对偶问题是：
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=max_{a}&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i&space;=&space;1}^{m}\sum_{j&space;=&space;1}^{m}&space;\alpha_{i}\alpha_{j}y_{i}y_{j}\phi(x_i)^T\phi(x_j)^T" target="_blank"><img src="https://latex.codecogs.com/gif.latex?max_{a}&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i&space;=&space;1}^{m}\sum_{j&space;=&space;1}^{m}&space;\alpha_{i}\alpha_{j}y_{i}y_{j}\phi(x_i)^T\phi(x_j)^T" title="max_{a} \sum_{i = 1}^{m} \alpha_{i} - \frac{1}{2}\sum_{i = 1}^{m}\sum_{j = 1}^{m} \alpha_{i}\alpha_{j}y_{i}y_{j}\phi(x_i)^T\phi(x_j)^T" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=max_{a}&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i&space;=&space;1}^{m}\sum_{j&space;=&space;1}^{m}&space;\alpha_{i}\alpha_{j}y_{i}y_{j}\phi(x_i)^T\phi(x_j)^T" target="_blank"><img src="https://latex.codecogs.com/gif.latex?max_{a}&space;\sum_{i&space;=&space;1}^{m}&space;\alpha_{i}&space;-&space;\frac{1}{2}\sum_{i&space;=&space;1}^{m}\sum_{j&space;=&space;1}^{m}&space;\alpha_{i}\alpha_{j}y_{i}y_{j}\phi(x_i)^T\phi(x_j)^T" title="max_{a} \sum_{i = 1}^{m} \alpha_{i} - \frac{1}{2}\sum_{i = 1}^{m}\sum_{j = 1}^{m} \alpha_{i}\alpha_{j}y_{i}y_{j}\phi(x_i)^T\phi(x_j)^T" /></a>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=s.t.&space;\sum_{i&space;=&space;1}^{m}\alpha_{i}y_{i}&space;=&space;0,&space;\\&space;\alpha_{i}&space;\ge&space;0,&space;i&space;=&space;1,2,...m" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s.t.&space;\sum_{i&space;=&space;1}^{m}\alpha_{i}y_{i}&space;=&space;0,&space;\\&space;\alpha_{i}&space;\ge&space;0,&space;i&space;=&space;1,2,...m" title="s.t. \sum_{i = 1}^{m}\alpha_{i}y_{i} = 0, \\ \alpha_{i} \ge 0, i = 1,2,...m" /></a>
+&ensp;&ensp;&ensp;&ensp;<a href="https://www.codecogs.com/eqnedit.php?latex=s.t.&space;\sum_{i&space;=&space;1}^{m}\alpha_{i}y_{i}&space;=&space;0,&space;\\&space;\alpha_{i}&space;\ge&space;0,&space;i&space;=&space;1,2,...m" target="_blank"><img src="https://latex.codecogs.com/gif.latex?s.t.&space;\sum_{i&space;=&space;1}^{m}\alpha_{i}y_{i}&space;=&space;0,&space;\\&space;\alpha_{i}&space;\ge&space;0,&space;i&space;=&space;1,2,...m" title="s.t. \sum_{i = 1}^{m}\alpha_{i}y_{i} = 0, \\ \alpha_{i} \ge 0, i = 1,2,...m" /></a>
 
-凡事
+&ensp;&ensp;&ensp;&ensp;凡是设计到\phi做内积的运算都很复杂，我们为了避开这个障碍，可以设想这样一个函数：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\kappa&space;(x_i,x_j)&space;=&space;<\phi(x_i),\pha(x,j)>&space;=&space;\phi(x_i)^T\phi(x_j)^T" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\kappa&space;(x_i,x_j)&space;=&space;<\phi(x_i),\pha(x,j)>&space;=&space;\phi(x_i)^T\phi(x_j)^T" title="\kappa (x_i,x_j) = <\phi(x_i),\pha(x,j)> = \phi(x_i)^T\phi(x_j)^T" /></a>
+
+&ensp;&ensp;&ensp;&ensp;我们通过这个函数来计算高维空间里面的内积，从而避开多维映射的计算。于是我们的对偶问题可以写成：
+
+
 
 
 ## 支持向量回归
