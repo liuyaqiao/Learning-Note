@@ -26,7 +26,7 @@
 
 ## 具体实现（ID3、C4.5、CART）
 
-&ensp;&ensp;&ensp;&ensp;以CART为例：
+&ensp;&ensp;&ensp;&ensp;以CART为例：  
 &ensp;&ensp;&ensp;&ensp;CART同样由特征选取、树的生成和剪枝两部分组成，它既可以用于分类问题也可以用于回归问题。它以GINI系数最小化为准则，进行特征选择名，递归地生成二叉树。
 
 - 回归树  
