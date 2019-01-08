@@ -1,7 +1,7 @@
 
 # Content
 ## Machine Learning
-1. basic rules
+1. Basic Rules
 2. [tradition algorithms](https://github.com/liuyaqiao/Learning-Note/tree/master/Machine%20Learning/Algorithms)
 	* LR
 	* SVM
@@ -14,7 +14,7 @@
 3. [lintcode](https://www.baidu.com)  
 
 ## Deep Learning
-1. basic concept
+1. Basic Concept
 2. CNN
 3. Paper
 
