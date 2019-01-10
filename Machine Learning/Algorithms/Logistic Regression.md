@@ -186,5 +186,24 @@ MvM是每次将若干个类作为正类，若干个类作为负类。但是类�
 注：  
     当类别标签是互斥的时候，适合用softmax回归。当类别标签不是互斥的时候，则可以使用其他的处理方式。  
 
+## 谈一下交叉熵
+
+我们想探讨一下为什么交叉熵用在这里来计算代价，我从两个角度来解释一下：
+
+1.理论角度
+
+我们要沿着熵、KL散度到交叉熵这条路线去解释：
+熵表示一个事件A的自信息量，也就是A包含多少信息。KL散度可以用来表示从A的角度来看，事件B有多大的不同。而交叉熵则可以用来表示从事件A的角度来看，如何去描述事件B。一句话来总结，KL散度可以被用来计算代价，而在特定情况下最小化KL散度等价于最小化交叉熵。而交叉熵的运算最简单，所以用交叉熵来当做代价。
+
+对于熵的定义就不多谈了，这里可以理解为表示所含信息的多少。
+我们用KL散度来计算两个事件/分布之间的不同，它不具有对称性。
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=D_(KL)(A||B)&space;=&space;\sum_{i}P_A(x_i)log(P_A(x_i)&space;)&space;-&space;P_A(x_i)log(P_B(x_i))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?D_(KL)(A||B)&space;=&space;\sum_{i}P_A(x_i)log(P_A(x_i)&space;)&space;-&space;P_A(x_i)log(P_B(x_i))" title="D_(KL)(A||B) = \sum_{i}P_A(x_i)log(P_A(x_i) ) - P_A(x_i)log(P_B(x_i))" /></a>
+
+这是KL散度的定义，我们可以定义为事件A和B的差别。如果PA等于PB的话，我们可以发现，KL散度为0.而且我们还发现，减号左边就是事件A的熵，而右边是B在A上的期望。
+
+
+
+2.数学推导角度
     
     
