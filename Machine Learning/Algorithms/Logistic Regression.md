@@ -202,8 +202,21 @@ MvM是每次将若干个类作为正类，若干个类作为负类。但是类�
 
 这是KL散度的定义，我们可以定义为事件A和B的差别。如果PA等于PB的话，我们可以发现，KL散度为0.而且我们还发现，减号左边就是事件A的熵，而右边是B在A上的期望。
 
+交叉熵的公式为：
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=H(A,&space;B)&space;=&space;-\sum_{i}&space;P_A(x_i)log(P_B(x_i))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?H(A,&space;B)&space;=&space;-\sum_{i}&space;P_A(x_i)log(P_B(x_i))" title="H(A, B) = -\sum_{i} P_A(x_i)log(P_B(x_i))" /></a>
+
+我们可以发现，如果A的熵值是一个常量，那么两个可以画等号，也就是说KL散度和交叉熵在特定条件下等价。
+
+交叉熵主要是描述这两个事件相互之间的关系，对自己求交叉熵等于自己的熵值。但是交叉熵本身的表达式中，并不含有熵值这项。可以理解为，知道一个事件后对另一个事件的不确定度。
+
+推广到ML的角度，ML在学习模型时，不能只看训练数据上的误差率和交叉熵，还要关注测试数据上的表现。所以我们的逻辑思路是，为了让学到的模型分布更贴近真实分布，我们最小化模型数据分布和训练数据之间的KL散度，而因为寻来呢数据的分布是固定的，所以最小化KL散度等价于最小化交叉熵，
+
+所以我们用来交叉熵来计算。
 
 2.数学推导角度
     
-    
+交叉熵的推导由似然函数而来，我们上文讲了推导。具体也可以[参考](https://blog.csdn.net/red_stone1/article/details/80735068)
+
+
+
