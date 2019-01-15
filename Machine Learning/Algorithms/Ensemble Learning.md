@@ -163,24 +163,8 @@
 	GBDT的主要缺点有：由于弱学习器之间存在依赖关系，难以并行训练数据。不过可以通过自采样的SGBT来达到部分并行。
 
 
-1. Boosting Tree
 
-对于分类问题，我们采取cross entropy误差来解决，所以和adaboost的思路相同。之后考虑回归树，我们使用平方损失来解决。
-
-<a href="https://www.codecogs.com/eqnedit.php?latex=L(y,&space;f(x))&space;=&space;(y&space;-&space;f(x))^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(y,&space;f(x))&space;=&space;(y&space;-&space;f(x))^2" title="L(y, f(x)) = (y - f(x))^2" /></a>
-
-<a href="https://www.codecogs.com/eqnedit.php?latex=L(y,&space;f_{m&space;-&space;1}(m)&space;&plus;&space;T(x,\theta_m))\\&space;=&space;[y&space;-&space;f_{m&space;-&space;1}(x)&space;-&space;T(x;&space;\theta_m)]^2&space;\\&space;=[r&space;-&space;T(x;\theta_m)]^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(y,&space;f_{m&space;-&space;1}(m)&space;&plus;&space;T(x,\theta_m))\\&space;=&space;[y&space;-&space;f_{m&space;-&space;1}(x)&space;-&space;T(x;&space;\theta_m)]^2&space;\\&space;=[r&space;-&space;T(x;\theta_m)]^2" title="L(y, f_{m - 1}(m) + T(x,\theta_m))\\ = [y - f_{m - 1}(x) - T(x; \theta_m)]^2 \\ =[r - T(x;\theta_m)]^2" /></a>
-
-这里r我们称为残差。所以对回归问题的提升树算法来说，只需要拟合当前模型的残差。学习到的新的决策树要用残差代替之前的y,去拟合一个是当前损失函数最小的新的决策树。
-
-提升树模型每一次的提升都是靠上次的预测结果与训练数据的label值差值作为新的训练数据进行重新训练，GDBT则是将残差计算替换成了损失函数的梯度方向，将上一次的预测结果带入梯度中求出本轮的训练数据，也就是说这两种模型在生成新的训练数据时采用了不同的方法。在使用平方误差损失函数和指数损失函数时，提升树的残差求解比较简单，但是在使用一般的损失误差函数时，残差求解起来不是那么容易，所以就使用损失函数的负梯度在当前模型的值作为回归问题中残差的近似值。
-
-2. Gradient Boosting
-    当损失函数是平方损失和指数损失的时候，每一步优化都很简单。但对于一般损失而言，往往每一步优化都并不那么容易，所以有人提出用损失函数的负梯度来作为残差的一个近似值，来拟合一个回归树。即：
-
-<a href="https://www.codecogs.com/eqnedit.php?latex=-[\frac{\partial&space;L(y,f(x_i))}{\partial&space;f(x_i)}]_{f(x))&space;=&space;f_{m-1}(x))}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?-[\frac{\partial&space;L(y,f(x_i))}{\partial&space;f(x_i)}]_{f(x))&space;=&space;f_{m-1}(x))}" title="-[\frac{\partial L(y,f(x_i))}{\partial f(x_i)}]_{f(x)) = f_{m-1}(x))}" /></a>
-
-3. 用GBDT去解决分类问题：
+- 用GBDT去解决分类问题：
 
 GBDT的分类算法从思想上和GBDT的回归算法没有区别，但是由于样本输出不是连续的值，而是离散的类别，导致我们无法直接从输出类别去拟合类别输出的误差。为了解决这个问题，主要有两个方法，一个是用指数损失函数，此时GBDT退化为Adaboost算法。另一种方法是用类似于逻辑回归的对数似然损失函数的方法。依旧是计算残差，但是计算方式略有不同。
 
