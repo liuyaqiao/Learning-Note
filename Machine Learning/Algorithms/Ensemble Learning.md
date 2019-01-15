@@ -77,6 +77,8 @@
 		
 ## GBDT
 
+- 算法
+
 	我们从boosting算法谈起，boosting算法的基本结构为：
 
 	输入：训练数据集T = {(x1,y1), (x2,y2),...,(xn,yn)}; 损失函数L; 基函数集b：
@@ -92,19 +94,19 @@
 
 	根据boosting算法的定义，可得：
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=F(x)&space;=&space;\sum\gamma&space;_ih_i(x)&space;&plus;&space;const" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F(x)&space;=&space;\sum\gamma&space;_ih_i(x)&space;&plus;&space;const" title="F(x) = \sum\gamma _ih_i(x) + const" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=F(x)&space;=&space;\sum\gamma&space;_ih_i(x)&space;&plus;&space;const" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F(x)&space;=&space;\sum\gamma&space;_ih_i(x)&space;&plus;&space;const" title="F(x) = \sum\gamma _ih_i(x) + const" /></a>
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=F_{m}&space;=&space;F_{m&space;-&space;1}&space;&plus;&space;h(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_{m}&space;=&space;F_{m&space;-&space;1}&space;&plus;&space;h(x)" title="F_{m} = F_{m - 1} + h(x)" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=F_{m}&space;=&space;F_{m&space;-&space;1}&space;&plus;&space;h(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_{m}&space;=&space;F_{m&space;-&space;1}&space;&plus;&space;h(x)" title="F_{m} = F_{m - 1} + h(x)" /></a>
 
 	我们可以得到：
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;&plus;&space;argmin_{h_m}[\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;&plus;&space;h_m(x_i))]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;&plus;&space;argmin_{h_m}[\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;&plus;&space;h_m(x_i))]" title="F_m(x) = F_{m - 1}(x) + argmin_{h_m}[\sum_{i = 1}^nL(y_i, F_{m - 1}(x_i) + h_m(x_i))]" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;&plus;&space;argmin_{h_m}[\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;&plus;&space;h_m(x_i))]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;&plus;&space;argmin_{h_m}[\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;&plus;&space;h_m(x_i))]" title="F_m(x) = F_{m - 1}(x) + argmin_{h_m}[\sum_{i = 1}^nL(y_i, F_{m - 1}(x_i) + h_m(x_i))]" /></a>
 
 	在任意的Loss函数时，我们在计算最小化的时候很困难。根据最速下降法，我们取负梯度的方向，可得：
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;-&space;\gamma&space;_m\sum_{i&space;=&space;1}^{n}\bigtriangledown&space;_{F_{m&space;-&space;1}}&space;L(y_i.&space;F_{m&space;-&space;1}(x_i))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;-&space;\gamma&space;_m\sum_{i&space;=&space;1}^{n}\bigtriangledown&space;_{F_{m&space;-&space;1}}&space;L(y_i.&space;F_{m&space;-&space;1}(x_i))" title="F_m(x) = F_{m - 1}(x) - \gamma _m\sum_{i = 1}^{n}\bigtriangledown _{F_{m - 1}} L(y_i. F_{m - 1}(x_i))" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;-&space;\gamma&space;_m\sum_{i&space;=&space;1}^{n}\bigtriangledown&space;_{F_{m&space;-&space;1}}&space;L(y_i.&space;F_{m&space;-&space;1}(x_i))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_m(x)&space;=&space;F_{m&space;-&space;1}(x)&space;-&space;\gamma&space;_m\sum_{i&space;=&space;1}^{n}\bigtriangledown&space;_{F_{m&space;-&space;1}}&space;L(y_i.&space;F_{m&space;-&space;1}(x_i))" title="F_m(x) = F_{m - 1}(x) - \gamma _m\sum_{i = 1}^{n}\bigtriangledown _{F_{m - 1}} L(y_i. F_{m - 1}(x_i))" /></a>
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=\gamma&space;_m&space;=&space;argmin_{\gamma}&space;\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;-&space;\gamma\bigtriangledown&space;_{F_{m&space;-&space;1}}L(y_i,&space;F_{m&space;-&space;1}(x_i))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma&space;_m&space;=&space;argmin_{\gamma}&space;\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;-&space;\gamma\bigtriangledown&space;_{F_{m&space;-&space;1}}L(y_i,&space;F_{m&space;-&space;1}(x_i))" title="\gamma _m = argmin_{\gamma} \sum_{i = 1}^nL(y_i, F_{m - 1}(x_i) - \gamma\bigtriangledown _{F_{m - 1}}L(y_i, F_{m - 1}(x_i))" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=\gamma&space;_m&space;=&space;argmin_{\gamma}&space;\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;-&space;\gamma\bigtriangledown&space;_{F_{m&space;-&space;1}}L(y_i,&space;F_{m&space;-&space;1}(x_i))" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma&space;_m&space;=&space;argmin_{\gamma}&space;\sum_{i&space;=&space;1}^nL(y_i,&space;F_{m&space;-&space;1}(x_i)&space;-&space;\gamma\bigtriangledown&space;_{F_{m&space;-&space;1}}L(y_i,&space;F_{m&space;-&space;1}(x_i))" title="\gamma _m = argmin_{\gamma} \sum_{i = 1}^nL(y_i, F_{m - 1}(x_i) - \gamma\bigtriangledown _{F_{m - 1}}L(y_i, F_{m - 1}(x_i))" /></a>
 
 	根据上式分别求出学习率和导数，就可以得到最终的F(x).
 
@@ -115,9 +117,9 @@
 
 	在boosting中，我们开始求解的公式为：
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" title="F_{m + 1}(x) = F_m(x) + h(x) = y" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" title="F_{m + 1}(x) = F_m(x) + h(x) = y" /></a>
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=h(x)&space;=&space;y&space;-&space;F_m(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(x)&space;=&space;y&space;-&space;F_m(x)" title="h(x) = y - F_m(x)" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=h(x)&space;=&space;y&space;-&space;F_m(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(x)&space;=&space;y&space;-&space;F_m(x)" title="h(x) = y - F_m(x)" /></a>
 
 	我们就把上面这个式子定义为残差，可以理解成：每一次的拟合都是在基于现在的残差去拟合的，这也是boosting慢慢变好的原理。在上面的算法中，我们用一个负梯度的形式代替了残差，这里可以根据函数在极小区间内的泰勒展开来理解。一个函数可以写成形如：f(x) = f(x - 1) + x区间 * 导数 的形式。
 
@@ -125,7 +127,7 @@
 
 	gbdt在第m步的时候使用决策树去拟合残差，残差依旧是通过上述的残差公式计算。我们假定J表示子叶的个数，h表示决策树，R表示每一个子节点的区域，b表示在该叶节点中所属的值。则有：
 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=h_m(x)&space;=&space;\sum_{j&space;=&space;1}^{J_{m}}b_{jm}1_{R_{jm}}(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_m(x)&space;=&space;\sum_{j&space;=&space;1}^{J_{m}}b_{jm}1_{R_{jm}}(x)" title="h_m(x) = \sum_{j = 1}^{J_{m}}b_{jm}1_{R_{jm}}(x)" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=h_m(x)&space;=&space;\sum_{j&space;=&space;1}^{J_{m}}b_{jm}1_{R_{jm}}(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_m(x)&space;=&space;\sum_{j&space;=&space;1}^{J_{m}}b_{jm}1_{R_{jm}}(x)" title="h_m(x) = \sum_{j = 1}^{J_{m}}b_{jm}1_{R_{jm}}(x)" /></a>
 
 	这里1表示在对应的R中，取1；反之为0；
 
@@ -133,7 +135,7 @@
 
 ![gdbt2](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/gbdt2.png)
 
-## Regularization
+- Regularization
 
 1.一个很重要的因素是轮次M，太高的M会导致overfit。（early stop）
 2.学习率，在F每一次更新的时候加一个学习率。我们会发现
@@ -142,13 +144,13 @@
 4.子采样（subsample）：采样比例（subsample）取值为(0,1]。注意这里的子采样和随机森林不一样，随机森林使用的是放回抽样，而这里是不放回抽样。如果取值为1，则全部样本都使用，等于没有使用子采样。如果取值小于1，则只有一部分样本会去做GBDT的决策树拟合。选择小于1的比例可以减少方差，即防止过拟合，但是会增加样本拟合的偏差，因此取值不能太低。推荐在[0.5, 0.8]之间。使用了子采样的GBDT有时也称作随机梯度提升树(Stochastic Gradient Boosting Tree, SGBT)。由于使用了子采样，程序可以通过采样分发到不同的任务去做boosting的迭代过程，最后形成新树，从而减少弱学习器难以并行学习的弱点。
 
 
-## 优点
+- 优点
 
 1. 可以灵活处理各种类型的数据，包括连续值和离散值。
 2. 在相对少的调参时间情况下，预测的准备率也可以比较高。这个是相对SVM来说的。
 3. 使用一些健壮的损失函数，对异常值的鲁棒性非常强。比如 Huber损失函数和Quantile损失函数。
 
-## 缺点
+- 缺点
 
 GBDT的主要缺点有：由于弱学习器之间存在依赖关系，难以并行训练数据。不过可以通过自采样的SGBT来达到部分并行。
 
