@@ -145,7 +145,7 @@
 
 	![gdbt2](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/gbdt2.png)
 	
-	
+	最优化的步骤分为两个：一是先找到一个决策树；而是为这个决策树匹配一个可以使Loss最小的权重。
 
 - Regularization
 
