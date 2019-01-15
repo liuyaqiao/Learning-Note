@@ -80,7 +80,8 @@
 		3.学习法（stacking）
 		
 		它先从初始数据集中训练出初级学习器，然后生成一个新的数据集用于训练次级学习器。在这个数据集中，初始学习器的输出作为输入，而原数据样本的标记仍作为样例标记。初级学习器可以是由相同或不同的算法生成。
-		**这里要注意的是**如果直接用初级学习器的训练集去产生次级训练集的话，则会过拟合风险比较大；所以，一般是通过交叉验证或者留一法，用训练初级学习器未使用的样本来产生次级学习器的训练样本。
+		
+		这里要注意的是如果直接用初级学习器的训练集去产生次级训练集的话，则会过拟合风险比较大；所以，一般是通过交叉验证或者留一法，用训练初级学习器未使用的样本来产生次级学习器的训练样本。
 		
 ## GBDT
 
@@ -118,14 +119,15 @@
 	根据上式分别求出学习率和导数，就可以得到最终的F(x).
 
 	算法说明如图：
-![gbdt](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/gdbt.png)
-	谈一下残差：
+	![gbdt](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/gdbt.png)
+	
+	谈一下**残差**：
 
 	在boosting中，我们开始求解的公式为：
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" title="F_{m + 1}(x) = F_m(x) + h(x) = y" /></a>
+	<a href="https://www.codecogs.com/eqnedit.php?latex=F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?F_{m&space;&plus;&space;1}(x)&space;=&space;F_m(x)&space;&plus;&space;h(x)&space;=&space;y" title="F_{m + 1}(x) = F_m(x) + h(x) = y" /></a>
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=h(x)&space;=&space;y&space;-&space;F_m(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(x)&space;=&space;y&space;-&space;F_m(x)" title="h(x) = y - F_m(x)" /></a>
+	<a href="https://www.codecogs.com/eqnedit.php?latex=h(x)&space;=&space;y&space;-&space;F_m(x)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h(x)&space;=&space;y&space;-&space;F_m(x)" title="h(x) = y - F_m(x)" /></a>
 
 	我们就把上面这个式子定义为残差，可以理解成：每一次的拟合都是在基于现在的残差去拟合的，这也是boosting慢慢变好的原理。在上面的算法中，我们用一个负梯度的形式代替了残差，这里可以根据函数在极小区间内的泰勒展开来理解。一个函数可以写成形如：f(x) = f(x - 1) + x区间 * 导数 的形式。
 
@@ -139,7 +141,7 @@
 
 	其余对Fm和权值的求解和上式相同，依旧是去做一个前向加法的最优化问题，最后使用线性加权平均的方式去组合。如下图：
 
-![gdbt2](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/gbdt2.png)
+	![gdbt2](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/gbdt2.png)
 
 - Regularization
 
