@@ -6,17 +6,43 @@
 
 - 定义：
 
-	偏差：偏差表示预测值和真实值之间的差距，如果偏差越大，则越偏离真实数据。即它刻画了模型本身的学习能力。
+	偏差：偏差表示预测值和真实值之间的差距，如果偏差越大，则越偏离真实数据。即它刻画了模型本身的学习能力。（所有输出平均值和标准值的差距）
 	
-	方差：方差度量了同样大小的数据集的变动导致学习性能的变化，即刻画了数据扰动所造成的影响。
+	方差：方差度量了同样大小的数据集的变动导致学习性能的变化，即刻画了数据扰动所造成的影响。（不同的训练集训练除模型的差异）
 	
 	噪声：噪声表达了在当前任务上任何算法所能达到期望泛化误差的下届，即刻画了学习问题本身的难度。
 	
+	用一张比较流行的图可以表示为：
+	
+	![v-b](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/variances_bias.png)
+	![v-b2](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/var_bias2.png)
+
+    另一方面，我们可以理解为：方差就是样本在训练集上的表现，越小的training error对应了越小偏差，在模型在验证集上的表现则对应了方差的表现。
+
+- 判断
+
+    我们该如何判断到底处于一个什么样的状态并且如何去解决呢？
+    
+    我们先要根据model在训练集和测试集上的表现来判断模型所处的状态：
+    
+    第一，我们要关注当前的大小。第二，我们要关注变化的趋势。比如说：当前training err很大，并且还在变小。我们可以判断，当前的model是一个underfit的趋势。
+
 - 策略
+
+    underfit的策略：（training dataset performance）
+    1.train longer
+    2.complex model
+    3.good features
+    
+    overfit的策略：（dev dataset performance）
+    1.Regularization
+    2.More Data
+    3.less features
+    4.cross validation
+    
+    更多的策略在神经网络中提及。
 	
-	我们想要的是偏差较小同时方差也较小的模型，但是他们往往是一个想对的问题：在拟合到一定程度的时候，一般不存在一种操作同时减少偏差和方差。
-	
-Boosting 主要是减小偏差， Bagging 减小方差。
+比如： Boosting 主要是减小偏差， Bagging 减小方差。
 
 ## 集成策略
 
