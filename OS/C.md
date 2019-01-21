@@ -11,9 +11,6 @@
 - memset：memset是计算机中C/C++语言初始化函数。作用是将某一块内存中的内容全部设置为指定的值， 这个函数通常为新申请的内存做初始化工作。
 
 - 在定义结构体时，struct abc {};
-
 我们如果定义一个结构体指针，需要先用malloc分配空间，再赋值；
-
-比如：
-
+比如：  
 ptr = (struct abc *) malloc (sizeof(struct abc));
