@@ -69,7 +69,8 @@ idx = blockIdx.x * blockDim.x + threadIdx.x
 
 同一个block上的thread会执行同样的instruction，这些threads理论上应该是在执行相同的指令；
 多个blcoks可以被分配给一个SM，但是不意味着他们会同时执行，取决于可用的资源；
-一个kernel对应一个grid（对应整个device），一个grid可以分成多个block（一个block对应了一个SM），
+
+一个kernel对应一个grid（对应整个device），一个grid可以分成多个block；
 
 2. memory Allocation
 
@@ -115,6 +116,7 @@ Step:
   
 　　一个SP可以执行一个thread，但是实际上并不是所有的thread能够在同一时刻执行。Nvidia把32个threads组成一个warp，warp是调度和运行的基本单元。warp中所有threads并行的执行相同的指令。一个warp需要占用一个SM运行，多个warps需要轮流进入SM。由SM的硬件warp scheduler负责调度。目前每个warp包含32个threads（Nvidia保留修改数量的权利）。所以，一个GPU上resident thread最多只有 SM*warp个。 
 
+    一个SM可以处理的block的数量是根据block之间的内存变量所决定的，看他们有多少个共享变量一个线程使用多少个，一个SM的空间可以提供多少个这样的block共同运行决定的。
 
 ## 优化
 
