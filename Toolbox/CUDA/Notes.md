@@ -20,7 +20,7 @@ SM:
     - warp schdedular
     - instruction dispatcher
 2. Execution unit
-    - CUDA cores
+    - CUDA cores(SP)
     - Speical Function Unit, LD/ST(Load Store Unit)
 3. memory
     - Registers
