@@ -67,6 +67,17 @@ IDs and Dimensions:
 
 idx = blockIdx.x * blockDim.x + threadIdx.x
 
+这里一般有四个变量：
+
+blockIdx.x(y,z)
+gridDim.x
+
+threadIdx.x(y,z)
+blockDim.x
+
+一般写为：
+dim3 grid(((nElem-1)/block.x)+1);
+
 同一个block上的thread会执行同样的instruction，这些threads理论上应该是在执行相同的指令；
 多个blcoks可以被分配给一个SM，但是不意味着他们会同时执行，取决于可用的资源；
 
@@ -86,6 +97,23 @@ free()
 eg:
 
 int nbytes = 1024 * sizeof(int)  大小 * sizeof(int)
+
+解释一下cudaMalloc函数：
+
+查看函数说明：
+
+Allocates size bytes of linear memory on the device and returns in *devPtr a pointer to the allocated memory. 
+
+首先要明确这个函数的意义，它指的是在gpu上分配一块指定大小的内存空间，并且让指针指向当前在device上的这块空间，而且这个函数的参数需要传入该指针的原地址：
+```
+float * dev = Null;
+size_t size = 1024 * sizeof(float);
+cudaMalloc((void \*\*) &dev, size);
+```
+
+cudaMalloc的第一个参数传递的是存储在cpu内存中的指针变量的地址，cudaMalloc在执行完成后，向这个地址中写入了一个地址值（此地址值是GPU显存里的）。这里如果直接穿指针，相当于传入了该指针指向的空间，而不是传入了该指针的地址。
+
+前面的（void\*\*）是强制类型转换；
 
 3. Data copy
 
