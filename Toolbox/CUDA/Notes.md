@@ -34,7 +34,7 @@ SM的数量决定了计算能力。
 
 SP：最基本的处理单元，streaming processor，也称为CUDA core。最后具体的指令和任务都是在SP上处理的。GPU进行并行计算，也就是很多个SP同时做处理。
 
-多个SP加上其他的一些资源组成一个streaming multiprocessor。也叫GPU大核，其他资源如：warp scheduler，register，shared memory等。SM可以看做GPU的心脏（对比CPU核心），register和shared memory是SM的稀缺资源。CUDA将这些资源分配给所有驻留在SM中的threads。因此，这些有限的资源就使每个SM中active warps有非常严格的限制，也就限制了并行能力。
+多个SP加上其他的一些资源组成一个streaming multiprocessor。也叫GPU大核，其他资源如：warp scheduler，register，shared memory等。SM可以看做GPU的心脏（对比CPU核心），register和shared memory是SM的稀缺资源。CUDA将这些资源分配给所有驻留在SM中的threads。因此，这些有限的资源就使每个SM中active warps有非常严格的限制，也就限制了并行能力。**这也是优化的方向。**
 
 在kepler中，一个逻辑控制单元控制32个cores，避免了因为逻辑控制单元太少而造成的cuda核心的冗余。
 
@@ -49,7 +49,7 @@ warp -- 通过切换来隐藏延迟
 1. kernel 函数
 
 thread :
-- all threada execute same sequential program
+- all threads execute same sequential program
 - threads execute in parallel
 
 thread block : a group of threads
