@@ -13,6 +13,8 @@
 
 ## GPU Architecture：
 
+![GPU](https://raw.githubusercontent.com/liuyaqiao/Learning-Note/master/Toolbox/CUDA/kepler%20GPU.png)
+
 SM:
 1. Control unit
     - warp schdedular
@@ -60,6 +62,10 @@ thread grid
 IDs and Dimensions:
 
 idx = blockIdx.x * blockDim.x + threadIdx.x
+
+同一个block上的thread会执行同样的instruction，这些threads理论上应该是在执行相同的指令；
+多个blcoks可以被分配给一个SM，但是不意味着他们会同时执行，取决于可用的资源；
+一个kernel对应一个grid（对应整个device），一个grid可以分成多个block（一个block对应了一个SM），
 
 2. memory Allocation
 
@@ -110,3 +116,15 @@ block中的线程可以读取自己的shared memory
 - registers （thread）
 
 data lifetime = thread lifetime
+
+## Warp
+
+- cuda用的是Single Instruction multiple thread，线程将会被分如warp（32个线程），所有在一个warp的线程会在同一时间执行同样的指令；
+- 每一个SM会把block分入warps，之后根据可用的硬件资源去调度他们；
+- 同一个warp上的thread会有不同的行为？？？
+- warp是基本的执行单元，warp内的thread必须执行相同的指令
+- 虽然说block、thread都可以是3D，但是在系统看来，都是1D的。
+- 最好取的线程数是32的倍数，这样warp不会被浪费
+- warp 采用scheduler去调度，每一个SM最多64warps，因为一个cycle中可以处理两个独立的instructions
+
+warps divergence：
