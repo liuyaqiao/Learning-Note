@@ -5,9 +5,9 @@
 前提：LR使用了线性组合的方式来逼近数据的分布，即可以使用wx的形式来表示数据的状态。
 
 LR遵从的是的是伯努利分布，伯努利分布是一个离散的两点分布，结果只有是或否两种情况。  
-  
+
 有如下的随机变量概率分布：  
-  
+
 <a href="https://www.codecogs.com/eqnedit.php?latex=Pr[x&space;=&space;1]&space;=&space;p" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr[x&space;=&space;1]&space;=&space;p" title="Pr[x = 1] = p" /></a>  
 <a href="https://www.codecogs.com/eqnedit.php?latex=Pr[x&space;=&space;0]&space;=&space;1&space;-&space;p" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Pr[x&space;=&space;0]&space;=&space;1&space;-&space;p" title="Pr[x = 0] = 1 - p" /></a>
 
@@ -110,12 +110,12 @@ L1正则化和L2正则化可以看做是损失函数的惩罚项。所谓『惩�
     即可等价于：  
     <a href="https://www.codecogs.com/eqnedit.php?latex=J_{R}(w)&space;=&space;\frac{1}{n}\left&space;\|&space;y&space;-&space;w^{T}X&space;\right&space;\|^{2}&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?J_{R}(w)&space;=&space;\frac{1}{n}\left&space;\|&space;y&space;-&space;w^{T}X&space;\right&space;\|^{2}&space;&plus;&space;\lambda&space;\left&space;\|&space;w&space;\right&space;\|^{2}" title="J_{R}(w) = \frac{1}{n}\left \| y - w^{T}X \right \|^{2} + \lambda \left \| w \right \|^{2}" /></a>  
     这就是我们所说的Ridge Regression，增加了L2正则化之后的损失函数的形式。类似的，如果设定w满足拉普拉斯分布，则cost function会有一个线性项的形式。拉普拉斯分布的特殊形式会为参数带来稀疏化的优良特性。  
-    
+
  `总结`
  >正则化参数等价于对参数引入先验分布，使得模型复杂度变小（缩小解空间），对于噪声以及 outliers 的鲁棒性增强（泛化能力）。整个最优化问题从贝叶斯观点来看是一种贝叶斯最大后验估计，其中正则化项对应后验估计中的先验信息，损失函数对应后验估计中的似然函数，两者的乘积即对应贝叶斯最大后验估计的形式。
-    
-    
-    
+
+
+​    
 ## 优缺点分析
 1. 优点
     1. 形式比较简单，可解释性较强。
@@ -140,11 +140,11 @@ OvO将数据的N个类两两配对，，从而产生N（N-1）/2个二分类任�
     实现多类别逻辑回归模型最简单的方法是，对于所有K个可能的分类结果，我们运行K−1个独立二元逻辑回归模型，在运行过程中把其中一个类别看成是主类别，然后将其它K−1个类别和我们所选择的主类别分别进行回归。通过这样的方式，如果选择结果K作为主类别的话，我们可以得到以下公式。   
     <a href="https://www.codecogs.com/eqnedit.php?latex=ln\frac{Pr(Y_{i}&space;=&space;1)}{Pr(Y_{i}&space;=&space;K)}&space;=&space;w&space;_{}&space;\cdot&space;X_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?ln\frac{Pr(Y_{i}&space;=&space;1)}{Pr(Y_{i}&space;=&space;K)}&space;=&space;w&space;_{}&space;\cdot&space;X_{i}" title="ln\frac{Pr(Y_{i} = 1)}{Pr(Y_{i} = K)} = w _{} \cdot X_{i}" /></a>  
     <a href="https://www.codecogs.com/eqnedit.php?latex=ln\frac{Pr(Y_{i}&space;=&space;1)}{Pr(Y_{i}&space;=&space;K)}&space;=&space;w&space;_{}&space;\cdot&space;X_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?ln\frac{Pr(Y_{i}&space;=&space;1)}{Pr(Y_{i}&space;=&space;K)}&space;=&space;w&space;_{}&space;\cdot&space;X_{i}" title="ln\frac{Pr(Y_{i} = 1)}{Pr(Y_{i} = K)} = w _{} \cdot X_{i}" /></a>
-    
+  
     ...    
-    
+  
     <a href="https://www.codecogs.com/eqnedit.php?latex=ln\frac{Pr(Y_{i}&space;=&space;1)}{Pr(Y_{i}&space;=&space;K)}&space;=&space;w&space;_{}&space;\cdot&space;X_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?ln\frac{Pr(Y_{i}&space;=&space;1)}{Pr(Y_{i}&space;=&space;K)}&space;=&space;w&space;_{}&space;\cdot&space;X_{i}" title="ln\frac{Pr(Y_{i} = 1)}{Pr(Y_{i} = K)} = w _{} \cdot X_{i}" /></a> 
-    
+  
     对上式进行指数化，有：  
     <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y_{i}&space;=&space;1)&space;=&space;P(Y&space;=&space;K)&space;e^{w_{1}\cdot&space;X_{i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y_{i}&space;=&space;1)&space;=&space;P(Y&space;=&space;K)&space;e^{w_{1}\cdot&space;X_{i}}" title="P(Y_{i} = 1) = P(Y = K) e^{w_{1}\cdot X_{i}}" /></a>  
     <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y_{i}&space;=&space;2)&space;=&space;P(Y&space;=&space;K)&space;e^{w_{2}\cdot&space;X_{i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y_{i}&space;=&space;2)&space;=&space;P(Y&space;=&space;K)&space;e^{w_{2}\cdot&space;X_{i}}" title="P(Y_{i} = 2) = P(Y = K) e^{w_{2}\cdot X_{i}}" /></a>  
@@ -152,15 +152,15 @@ OvO将数据的N个类两两配对，，从而产生N（N-1）/2个二分类任�
     <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y_{i}&space;=&space;K&space;-&space;1)&space;=&space;P(Y&space;=&space;K)&space;e^{w_{K&space;-&space;1}\cdot&space;X_{i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y_{i}&space;=&space;K&space;-&space;1)&space;=&space;P(Y&space;=&space;K)&space;e^{w_{K&space;-&space;1}\cdot&space;X_{i}}" title="P(Y_{i} = K - 1) = P(Y = K) e^{w_{K - 1}\cdot X_{i}}" /></a>  
     要注意的是，我们最后得到的概率和必须为1，所以我们可以得到如下的表达式：   
     假设随机变量Y的取值集合为{1,2,...,K}, 则多项逻辑回归的模型是:
-    
+  
     <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y&space;=&space;K&space;|&space;x)&space;=&space;\frac{1}{1&space;&plus;&space;\sum_{k&space;=&space;1}^{K&space;-&space;1}exp(w_{k}&space;\cdot&space;x)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y&space;=&space;K&space;|&space;x)&space;=&space;\frac{1}{1&space;&plus;&space;\sum_{k&space;=&space;1}^{K&space;-&space;1}exp(w_{k}&space;\cdot&space;x)}" title="P(Y = K | x) = \frac{1}{1 + \sum_{k = 1}^{K - 1}exp(w_{k} \cdot x)}" /></a>    
 
     <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y&space;=&space;k&space;|&space;x)&space;=&space;\frac{exp(w_{k}\cdot&space;x)}{1&space;&plus;&space;\sum_{k&space;=&space;1}^{K&space;-&space;1}exp(w_{k}&space;\cdot&space;x)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y&space;=&space;k&space;|&space;x)&space;=&space;\frac{exp(w_{k}\cdot&space;x)}{1&space;&plus;&space;\sum_{k&space;=&space;1}^{K&space;-&space;1}exp(w_{k}&space;\cdot&space;x)}" title="P(Y = k | x) = \frac{exp(w_{k}\cdot x)}{1 + \sum_{k = 1}^{K - 1}exp(w_{k} \cdot x)}" /></a >            
-    
+  
     <a href="https://www.codecogs.com/eqnedit.php?latex=k&space;=&space;1,2,...,K&space;-&space;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k&space;=&space;1,2,...,K&space;-&space;1" title="k = 1,2,...,K - 1" /></a>
 
     通过这种方式，就可以扩展到多个类别的分类问题。
-    
+  
 2. OvR  
 OvR则是每次把一个类的样例作为正例、所有其他类的样例作为反例来训练N个分类器。测试时如果只有一个分类器预测为正例，则采用这个分类器的结果。如果多个分类器都预测为正例，则要考虑置信度区间参数。
 3. MvM  
@@ -183,6 +183,7 @@ MvM是每次将若干个类作为正类，若干个类作为负类。但是类�
     <a href="https://www.codecogs.com/eqnedit.php?latex=softmax(k,x_{1},x_{2},...,x_{n})&space;=&space;\frac{e^{x_{k}}}{\sum_{i&space;=&space;1}^{n}e^{x_{i}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?softmax(k,x_{1},x_{2},...,x_{n})&space;=&space;\frac{e^{x_{k}}}{\sum_{i&space;=&space;1}^{n}e^{x_{i}}}" title="softmax(k,x_{1},x_{2},...,x_{n}) = \frac{e^{x_{k}}}{\sum_{i = 1}^{n}e^{x_{i}}}" /></a>  
     这个函数能够将各个自变量之间的差别放大，通过softmax函数的形式可以构造出一个像是平滑函数一样的加权平均函数。 
     
+
 注：  
     当类别标签是互斥的时候，适合用softmax回归。当类别标签不是互斥的时候，则可以使用其他的处理方式。  
 
