@@ -173,3 +173,8 @@ data lifetime = thread lifetime
 - warp 采用scheduler去调度，每一个SM最多64warps，因为一个cycle中可以处理两个独立的instructions
 
 warps divergence：
+
+
+bank conflict:
+
+Shared memory 分成16 个 bank。如果同时每个 thread 是存取不同的 bank，就不会产生任何问题，存取 shared memory 的速度和存取寄存器相同。不过，如果同时有两个（或更多个） threads 存取同一个bank 的数据，就会发生 bank conflict，这些 threads 就必须照顺序去存取，而无法同时存取shared memory 了。
