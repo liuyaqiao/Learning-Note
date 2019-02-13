@@ -40,9 +40,24 @@ SP：最基本的处理单元，streaming processor，也称为CUDA core。最�
 
 ## Memory Hierarchy:
 
-global mem ： 访问的缓存延迟很高，所以使用了L2
+CUDA构架中，最小的执行单元是thread。数个thread可以组成一个block，一个block中的thread能够读取同一块内存空间，这里就是share memory，他们可以快速进行同步工作。每一个block所能包含的thread的数目是有限的，不过执行相同指令的block可以构成一个grid。一个grid执行的是一个kernel函数。
 
-warp -- 通过切换来隐藏延迟
+每个 thread 都有自己的一份 register 和 local memory 的空间。同一个 block 中的每个 thread 则有共享的一份 share memory。此外，所有的 thread(包括不同 block 的 thread)都 共享一份 global memory、constant memory、和 texture memory。不同的 grid 则有各自的 global memory、constant memory 和 texture memory。
+
+我们最好的情况是需要高带宽，低延迟的情况；
+
+- share memory
+
+在share memory中，所有的数据以bank的数据存储，它可以分钟16个bank。如果不同的thread存取不同的bank，则不会有问题。如果他们读取同一个bank，则会发生bank conflict的问题，这时thread必须按照顺序去读取，无法同时读取shared memory。bank以4字节为单位，分成bank。
+
+这里需要考虑的问题有两个：
+
+1. memory的储存方式
+2. warp的读取方式会不会造成bank conflict
+
+- Global memory
+
+对于global memory，因为它的读取延迟比较高。我们要考虑的是读取的内容要尽可能的连续，这就是coalesced的要求。初次之外，它开始的地址必须是每一个thread所存取大小的16倍。
 
 ## CUDA Program
 
@@ -174,6 +189,7 @@ data lifetime = thread lifetime
 
 warps divergence：
 
+同一个warp中的thread，因为分支结构的存在，进入了不同的分支。
 
 bank conflict:
 
