@@ -67,6 +67,8 @@ IDs and Dimensions:
 
 idx = blockIdx.x * blockDim.x + threadIdx.x
 
+这里采用SIMD的方式来计算；同一条指令多个线程来执行：
+
 这里一般有四个变量：
 
 blockIdx.x(y,z)
@@ -164,6 +166,7 @@ data lifetime = thread lifetime
 
 ## Warp
 
+- 可以看成线程执行的队列
 - cuda用的是Single Instruction multiple thread，线程将会被分如warp（32个线程），所有在一个warp的线程会在同一时间执行同样的指令；
 - 每一个SM会把block分入warps，之后根据可用的硬件资源去调度他们；
 - 同一个warp上的thread会有不同的行为？？？
@@ -173,3 +176,49 @@ data lifetime = thread lifetime
 - warp 采用scheduler去调度，每一个SM最多64warps，因为一个cycle中可以处理两个独立的instructions
 
 warps divergence：
+
+## Memory Model
+
+- 我们要尽量做到data locality去最优化memory的实现
+
+- Available Memory 
+    - Registers
+    - Shared Memory
+    - Local Memory
+    - Constant Memory
+    - Texture Memory
+    - Global Memory : in device mem; largest; hign latency; slow; 
+
+### Global Memory:
+- 被 half warp / 16个线程同时访问
+- 以32，64，128位的片段访问
+- 如果可以连续访问比较快，分散访问的化比较慢
+
+所以我们想出的办法是**Memory Coalescing**
+1. 尽量一次读取的内存地址是连续的
+2. 第一个thread读的地址是64的倍数
+
+这样会提高效率。
+
+### Registers
+
+- fastest
+- 在kernel中没有标志符的变量就是有register来存取
+- private by thread，数量有限，64 K entries
+
+### shared memory
+
+- fast,low latency, smalled size
+- as a block-level
+- use __syncthreads() to avoid race conditions
+- best way to optimize
+- __share__ 开头
+
+the shared memory is divided into banks.
+
+
+### Texture Memory
+
+### Constant Memory
+
+## 我们关注的高性能计算的两个因素是延迟和吞吐量 latency and bandwidth
