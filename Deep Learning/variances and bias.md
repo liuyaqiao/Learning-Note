@@ -36,6 +36,7 @@ solve underfit:
 2. more epochs
 3. complex models(nonlinear model)
 4. less regularization
+5. 用更有效的优化方法
 
 solve overfit:
 1. cross validation
@@ -54,4 +55,7 @@ In DNN:
 6. less complex NN 
 7. Add Noise(输入中，权重中，输出中)
 8. Boosting 和 Bagging为主的集成模型
+9. 减小学习率
+
+
 
