@@ -14,3 +14,5 @@
 我们如果定义一个结构体指针，需要先用malloc分配空间，再赋值；
 比如：  
 ptr = (struct abc *) malloc (sizeof(struct abc));
+
+- void * : void指针一般被称为通用指针或泛指针，它是C关于“纯粹地址(raw address)”的一种约定。void指针指向某个对象，但该对象不属于任何类型。但是它可以转换为任意一个类型的指针。
